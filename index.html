@@ -1,0 +1,5018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Fittmore</title>
+  <!-- Font Awesome -->
+     <link rel="icon" type="image/x-icon" href="favicon.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Material Icons & Symbols -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide scrollbar for all elements but keep functionality */
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    *::-webkit-scrollbar {
+      display: none;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F8F8F8;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #2D2D2D;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 100%;
+      background: #F8F8F8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 120px;
+      overflow-x: hidden;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 24px 20px 40px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    @media (min-width: 600px) {
+      .main-content {
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+    }
+
+    /* Floating Mascot Icon - with appear grow animation */
+    .floating-person-icon {
+      position: fixed;
+      bottom: 75px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      filter: drop-shadow(0 8px 20px rgba(229, 57, 53, 0.3));
+      animation: appearGrow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+    
+    .floating-person-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    
+    .floating-person-icon:active {
+      transform: scale(0.9);
+      filter: drop-shadow(0 4px 12px rgba(229, 57, 53, 0.4));
+    }
+
+    /* Animations */
+    @keyframes appearGrow {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes scaleGrow {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes appearGrowCard {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes appearGrowIcon {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideFromTop {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideFromBottom {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideFromCenter {
+      0% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes typing {
+      0% {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+      }
+      100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes progressFill {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 32%;
+      }
+    }
+
+    @keyframes buttonGrow {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* New animation utility classes */
+    .anim-slide-from-top {
+      animation: slideFromTop 0.4s ease-out both;
+    }
+    .anim-slide-from-left {
+      animation: slideFromLeft 0.4s ease-out both;
+    }
+    .anim-slide-from-bottom {
+      animation: slideFromBottom 0.4s ease-out both;
+    }
+    .anim-appear-grow {
+      animation: appearGrowIcon 0.3s ease-out both;
+    }
+    .anim-scale-grow {
+      animation: scaleGrow 0.3s ease-out both;
+    }
+    .anim-fade-in {
+      animation: fadeIn 0.5s ease-out both;
+    }
+
+    /* Scroll-triggered animation classes */
+    .scroll-animate {
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .scroll-animate.slide-left {
+      transform: translateX(-40px);
+    }
+
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateX(0) translateY(0) scale(1);
+    }
+
+    /* Section title */
+    .section-title {
+      /* No scroll animation */
+    }
+
+    .blog-card.scroll-animate {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .blog-card.scroll-animate.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .grid-item.scroll-animate {
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .grid-item.scroll-animate.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Activity item - NO scroll animation */
+    .activity-item {
+      /* No scroll animation */
+    }
+
+    /* header - visible on home and profile pages */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .profile-icon {
+      background: #FFEBEE;
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 2rem;
+      cursor: default;
+      transition: transform 0.1s ease;
+      flex-shrink: 0;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+
+    .greeting {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .greeting h2 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #585858;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      animation: typing 0.6s steps(20, end) 0.2s both;
+    }
+
+    .greeting p {
+      color: #EF5350;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-top: 4px;
+      animation: typing 0.5s steps(15, end) 0.4s both;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .notification-icon {
+      background: transparent;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      position: relative;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+    }
+    
+    .notification-icon:active {
+      transform: scale(0.95);
+    }
+    
+    .notification-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: #E53935;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #socialPage .app-header {
+      display: none;
+    }
+    
+    #profilePage .app-header {
+      display: none;
+    }
+
+    /* Highlight cards - with appear grow animation */
+    .highlight-card {
+      border-radius: 32px;
+      padding: 24px 22px;
+      color: white;
+      margin-bottom: 20px;
+      box-shadow: 0 16px 24px -8px rgba(229, 57, 53, 0.2);
+      width: 100%;
+      background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%);
+      animation: appearGrowCard 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s both;
+    }
+    
+    .gold-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .step-value {
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: white;
+      cursor: default;
+      pointer-events: none;
+    }
+    
+    .update-btn {
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 30px;
+      padding: 10px 18px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(5px);
+      outline: none;
+      animation: appearGrow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
+    }
+    
+    .update-btn:active {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(0.95);
+    }
+
+    .progress-bg {
+      background: rgba(255, 255, 255, 0.9);
+      height: 12px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 6px 0 8px;
+      width: 100%;
+    }
+    .progress-fill {
+      background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%);
+      height: 12px;
+      border-radius: 20px;
+      width: 0%;
+      animation: progressFill 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+    }
+
+    .progress-stats-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    /* Day Slider Container - for slide animation */
+    .day-slider-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin-top: 8px;
+      margin-bottom: 24px;
+    }
+    
+    .day-slider-track {
+      display: flex;
+      width: 700%;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    
+    .day-slide {
+      width: 14.285%;
+      flex-shrink: 0;
+    }
+
+    /* Day toggle buttons */
+    .day-toggle-wrapper {
+      margin-top: 8px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+    
+    .day-toggle {
+      display: flex;
+      border-bottom: 1px solid #EFEFEF;
+      width: 100%;
+      position: relative;
+    }
+    
+    .day-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 0;
+      background: transparent;
+      border: none;
+      color: #8E8E8E;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      outline: none;
+      animation: slideFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(0.1s * var(--i, 1)) both;
+    }
+    
+    .day-btn:nth-child(1) { --i: 1; }
+    .day-btn:nth-child(2) { --i: 2; }
+    .day-btn:nth-child(3) { --i: 3; }
+    .day-btn:nth-child(4) { --i: 4; }
+    .day-btn:nth-child(5) { --i: 5; }
+    .day-btn:nth-child(6) { --i: 6; }
+    .day-btn:nth-child(7) { --i: 7; }
+    
+    .day-btn.active {
+      color: #E53935;
+    }
+    
+    /* Animated sliding border for day toggle - BOTTOM PIXEL */
+    .day-toggle .sliding-border {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 14.28%;
+      height: 2px;
+      background: #E53935;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      animation: slideFromCenter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+      transform-origin: center;
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+
+    /* Section Titles */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    .section-title h3 {
+      font-weight: 700;
+      color: #585858;
+      font-size: 1.4rem;
+    }
+    
+    .section-title span {
+      color: #EF5350;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .section-title span i {
+      font-size: 1rem;
+    }
+
+    /* Activity list - Training items */
+    .activity-list { 
+      margin-bottom: 8px; 
+      width: 100%;
+    }
+    
+    .activity-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 8px;
+      border-bottom: 1px solid #E8E8E8;
+      width: 100%;
+      cursor: default;
+      transition: background 0.2s ease;
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+    .activity-info { flex: 1; min-width: 0; }
+    .activity-info h4 {
+      font-weight: 700;
+      color: #585858;
+      font-size: 1.1rem;
+    }
+    .activity-info p {
+      font-size: 0.85rem;
+      color: #EF5350;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .activity-check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid #FF8A80;
+      background: transparent;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    
+    .activity-check.completed {
+      background: #E53935;
+      border-color: #E53935;
+    }
+    
+    .activity-check.completed i { 
+      opacity: 1;
+      color: white;
+    }
+    
+    .activity-check i {
+      font-size: 0.85rem;
+      opacity: 0;
+      color: #C62828;
+      transform: translateY(1px);
+    }
+    
+    .activity-check:not(.completed) i { display: none; }
+
+    /* Pages */
+    .page { display: none; width: 100%; }
+    .page.active { display: block; }
+    #socialPage, #profilePage { padding-top: 8px; }
+
+    /* ========== SOCIAL PAGE STYLES ========== */
+    .social-search-header {
+      margin-bottom: 16px;
+      width: 100%;
+      position: relative;
+    }
+    
+    .search-bar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    
+    .search-bar {
+      background: white;
+      border-radius: 30px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid #F0F0F0;
+      flex: 1;
+    }
+    
+    .search-bar i, .search-bar .material-symbols-outlined {
+      color: #EF5350;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    
+    .search-bar i.fa-search {
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+    
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      background: transparent;
+      min-width: 0;
+    }
+    
+    .search-bar input::placeholder {
+      color: #C0C0C0;
+    }
+    
+    .add-btn-outside {
+      background: transparent;
+      width: 48px;
+      height: 48px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      flex-shrink: 0;
+      outline: none;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+    
+    .add-btn-outside:active {
+      transform: scale(0.95);
+    }
+    
+    .add-btn-outside .material-symbols-outlined {
+      font-size: 28px;
+      color: #C62828;
+    }
+
+    /* Search Dropdown */
+    .search-dropdown {
+      position: absolute;
+      left: 0;
+      right: 60px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid #EFEFEF;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+    }
+    
+    .search-dropdown.active {
+      display: block;
+    }
+    
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      border-bottom: 1px solid #F5F5F5;
+    }
+    
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+    
+    .search-result-item:active {
+      background: #FFEBEE;
+    }
+    
+    .search-result-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 22px;
+      background: #FFEBEE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    
+    .search-result-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .search-result-name {
+      font-weight: 600;
+      color: #262626;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    
+    .search-result-email {
+      font-size: 0.8rem;
+      color: #8E8E8E;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .search-no-results {
+      padding: 20px;
+      text-align: center;
+      color: #8E8E8E;
+      font-size: 0.9rem;
+    }
+
+    /* Posts/Blogs/Reels Toggle */
+    .feed-toggle {
+      display: flex;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      width: 100%;
+      position: relative;
+      border-bottom: 1px solid #EFEFEF;
+    }
+    
+    .toggle-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 0;
+      background: transparent;
+      border: none;
+      color: #8E8E8E;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      outline: none;
+      animation: slideFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(0.1s * var(--i, 1)) both;
+    }
+    
+    .toggle-btn:nth-child(1) { --i: 1; }
+    .toggle-btn:nth-child(2) { --i: 2; }
+    .toggle-btn:nth-child(3) { --i: 3; }
+    
+    .toggle-btn .material-symbols-outlined {
+      font-size: 1.5rem;
+    }
+    
+    .toggle-btn.active {
+      color: #E53935;
+    }
+    
+    /* All toggle icons default outlined */
+    .toggle-btn .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0;
+    }
+    /* Active toggle icon becomes filled */
+    .toggle-btn.active .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1;
+      color: #E53935;
+    }
+    
+    /* Animated sliding border for feed toggle - BOTTOM PIXEL */
+    .feed-toggle .sliding-border {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 33.33%;
+      height: 2px;
+      background: #E53935;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      animation: slideFromCenter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+      transform-origin: center;
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+
+    /* Profile Toggle */
+    .profile-toggle {
+      display: flex;
+      margin-bottom: 12px;
+      width: 100%;
+      position: relative;
+      border-bottom: 1px solid #EFEFEF;
+    }
+    
+    .profile-toggle .toggle-btn {
+      padding: 10px 0;
+      animation: slideFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(0.1s * var(--i, 1)) both;
+    }
+    
+    /* Animated sliding border for profile toggle - BOTTOM PIXEL */
+    .profile-toggle .sliding-border {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 33.33%;
+      height: 2px;
+      background: #E53935;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      animation: slideFromCenter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+      transform-origin: center;
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+
+    /* Feed Slider Container - for slide animation */
+    .feed-slider-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .feed-slider-track {
+      display: flex;
+      width: 300%;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    
+    .feed-slide {
+      width: 33.333%;
+      flex-shrink: 0;
+    }
+    
+    /* Profile Slider Container */
+    .profile-slider-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .profile-slider-track {
+      display: flex;
+      width: 300%;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+    
+    .profile-slide {
+      width: 33.333%;
+      flex-shrink: 0;
+    }
+
+    /* 3-Column Grid for Posts and Reels */
+    .grid-3-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      width: 100%;
+    }
+    
+    .grid-item {
+      aspect-ratio: 1 / 1;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    
+    /* Reel items have 9:16 aspect ratio */
+    .reels-grid-container .grid-item,
+    .profile-slide .reels-grid-container .grid-item {
+      aspect-ratio: 9 / 16;
+    }
+    
+    .grid-item img,
+    .grid-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .grid-item video {
+      background: #000;
+    }
+    
+    /* Blog Card Styles - No photo */
+    .blog-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      width: 100%;
+      border: 1px solid #EFEFEF;
+    }
+    
+    .blog-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .blog-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 21px;
+      background: #FFEBEE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      outline: none;
+    }
+    
+    .blog-avatar:active {
+      transform: scale(0.95);
+    }
+    
+    .blog-user-info {
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+    }
+    
+    .blog-user-name {
+      font-weight: 600;
+      color: #262626;
+      font-size: 0.95rem;
+    }
+    
+    .blog-time {
+      font-size: 0.7rem;
+      color: #8E8E8E;
+      margin-top: 2px;
+    }
+    
+    .blog-title {
+      font-weight: 700;
+      color: #262626;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    
+    .blog-excerpt {
+      color: #585858;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    
+    .blog-stats {
+      display: flex;
+      gap: 20px;
+      padding-top: 8px;
+      border-top: 1px solid #EFEFEF;
+    }
+    
+    .blog-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #262626;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    
+    .blog-stat i {
+      font-size: 1.2rem;
+    }
+    
+    .blog-stat.liked i {
+      color: #E53935;
+    }
+    
+    .blog-stat.liked {
+      color: #262626 !important;
+    }
+
+    .blog-stat:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
+    .blog-menu-btn:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
+
+    /* Stats overlay for grid items */
+    .post-stats-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 6px 4px;
+      display: flex;
+      gap: 10px;
+      color: white;
+      font-size: 0.7rem;
+      z-index: 2;
+      background: linear-gradient(transparent, rgba(0,0,0,0.4));
+    }
+    
+    .post-stats-overlay span {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    /* Full-screen Modal */
+    .fullscreen-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 2000;
+      display: none;
+    }
+    
+    .fullscreen-modal.active {
+      display: block;
+    }
+    
+    .modal-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 25;
+      pointer-events: none;
+    }
+    
+    .modal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+    }
+    
+    .modal-back-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      outline: none;
+    }
+    
+    .modal-scroll-container {
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Individual slide */
+    .modal-slide {
+      width: 100%;
+      height: 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .modal-slide-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .modal-media {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+    
+    .modal-media.post-media {
+      aspect-ratio: 1 / 1;
+      max-height: 90vh;
+      width: auto;
+    }
+    
+    .modal-media.reel-media {
+      aspect-ratio: 9 / 16;
+      max-height: 90vh;
+      width: auto;
+    }
+    
+    .modal-media img,
+    .modal-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .modal-actions-sidebar {
+      position: absolute;
+      right: 12px;
+      bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 20;
+    }
+    
+    .modal-action-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 8px;
+      transition: transform 0.1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      outline: none;
+    }
+    
+    .modal-action-btn:active {
+      transform: scale(0.9);
+    }
+    
+    .modal-action-btn.liked {
+      color: #E53935;
+    }
+    
+    .modal-action-btn.liked span {
+      color: white !important;
+    }
+    
+    .modal-action-btn span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: white;
+    }
+    
+    .modal-profile-section {
+      position: absolute;
+      bottom: 20px;
+      left: 16px;
+      right: 100px;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .modal-profile-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: #FFEBEE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.3);
+      outline: none;
+    }
+    
+    .modal-profile-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .modal-profile-username {
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: block;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      margin-bottom: 4px;
+    }
+    
+    .modal-caption-wrapper {
+      display: inline;
+    }
+    
+    .modal-profile-caption {
+      color: white;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+    
+    .modal-caption-more,
+    .modal-caption-less {
+      color: #8E8E8E;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-left: 4px;
+      cursor: pointer;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      display: inline;
+    }
+    
+    .modal-caption-more:active,
+    .modal-caption-less:active {
+      color: #C0C0C0;
+    }
+
+    /* Follow + Chat button row */
+    .follow-chat-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+    
+    .follow-btn {
+      flex: 1;
+      background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%);
+      border: none;
+      border-radius: 30px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(229, 57, 53, 0.25);
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      outline: none;
+      animation: buttonGrow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+    }
+    
+    .follow-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(229, 57, 53, 0.1);
+    }
+    
+    .follow-btn.following {
+      background: white;
+      color: #E53935;
+      border: 1.5px solid #E53935;
+      box-shadow: 0 2px 8px rgba(229, 57, 53, 0.1);
+    }
+    
+    .chat-btn-profile {
+      flex: 1;
+      background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%);
+      border: none;
+      border-radius: 30px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(229, 57, 53, 0.25);
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      outline: none;
+      animation: buttonGrow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s both;
+    }
+    
+    .chat-btn-profile:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(229, 57, 53, 0.1);
+    }
+
+    /* Profile action buttons */
+    .profile-actions-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+    
+    .profile-action-btn {
+      flex: 1;
+      background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%);
+      border: none;
+      border-radius: 30px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(229, 57, 53, 0.25);
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+      outline: none;
+      animation: appearGrowCard 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+    }
+    
+    .profile-action-btn:nth-child(2) {
+      animation: appearGrowCard 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
+    }
+    
+    .profile-action-btn i {
+      font-size: 1.1rem;
+    }
+    
+    .profile-action-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(229, 57, 53, 0.1);
+    }
+
+    /* Profile Page */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      width: 100%;
+    }
+    
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .profile-avatar {
+      background: #FFCDD2;
+      width: 70px;
+      height: 70px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: #C62828;
+      flex-shrink: 0;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+    
+    .profile-info {
+      min-width: 0;
+      animation: slideFromLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+    }
+    
+    .profile-name-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .profile-info h2 {
+      font-weight: 700;
+      color: #585858;
+      font-size: 1.2rem;
+    }
+    
+    .profile-info h3 {
+      font-weight: 700;
+      color: #585858;
+      font-size: 1rem;
+    }
+    
+    .gold-badge {
+      background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%);
+      border: none;
+      border-radius: 30px;
+      padding: 4px 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    
+    .profile-info p { 
+      color: #EF5350;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .profile-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    
+    .profile-add-icon {
+      background: transparent;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      outline: none;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+    }
+    
+    .profile-add-icon:active {
+      transform: scale(0.95);
+    }
+    
+    .profile-menu-icon {
+      background: transparent;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      flex-shrink: 0;
+      outline: none;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+    }
+
+    /* Profile modal within Social */
+    .profile-modal {
+      background: #F8F8F8;
+      border-radius: 28px;
+      padding: 0;
+      margin-top: 0;
+      width: 100%;
+    }
+    
+    .profile-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      width: 100%;
+    }
+    
+    .back-button {
+      background: transparent;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      flex-shrink: 0;
+      outline: none;
+      animation: slideFromLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+    }
+    
+    .profile-view-avatar {
+      background: #FFCDD2;
+      width: 70px;
+      height: 70px;
+      border-radius: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 500;
+      color: #C62828;
+      flex-shrink: 0;
+      animation: appearGrowIcon 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s both;
+    }
+    
+    .profile-view-info {
+      flex: 1;
+      min-width: 0;
+      animation: slideFromLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+    }
+    
+    .profile-view-name-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .profile-view-info h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #585858;
+    }
+    
+    .profile-view-info p {
+      color: #EF5350;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 16px 20px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-sizing: border-box;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #B0B0B0;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      gap: 4px;
+      position: relative;
+      outline: none;
+      animation: slideFromBottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(0.1s * var(--i, 1)) both;
+    }
+    
+    .nav-item:nth-child(1) { --i: 1; }
+    .nav-item:nth-child(2) { --i: 2; }
+    .nav-item:nth-child(3) { --i: 3; }
+    
+    .nav-item .material-symbols-outlined { 
+      font-size: 26px; 
+      font-variation-settings: 'FILL' 0, 'wght' 400;
+      color: #B0B0B0;
+    }
+    .nav-item.active .material-symbols-outlined { 
+      color: #C62828; 
+      font-variation-settings: 'FILL' 1, 'wght' 400;
+    }
+
+    button { 
+      background: none; 
+      border: none; 
+      font-family: inherit; 
+      outline: none;
+    }
+
+    /* Menu Item Hover Effect */
+    .menu-item:hover {
+      background: #F5F5F5;
+    }
+    
+    .menu-item:active {
+      background: #E8E8E8;
+    }
+
+    .create-tab-btn {
+      flex: 1;
+      padding: 12px 0;
+      background: transparent;
+      border: none;
+      color: #8E8E8E;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+      animation: slideFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) calc(0.1s * var(--i, 1)) both;
+    }
+    .create-tab-btn:nth-child(1) { --i: 1; }
+    .create-tab-btn:nth-child(2) { --i: 2; }
+    .create-tab-btn:nth-child(3) { --i: 3; }
+    .create-tab-btn.active {
+      color: #E53935;
+    }
+
+    #createModalTabs {
+      position: relative;
+    }
+    #createModalTabs .sliding-border {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 33.33%;
+      height: 2px;
+      background: #E53935;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    #loginPage input:focus {
+      border-color: #EF9A9A;
+    }
+
+    /* ========== NOTIFICATION PAGE STYLES ========== */
+    .notif-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #EFEFEF;
+      cursor: pointer;
+    }
+    .notif-item:active {
+      background: #FFEBEE;
+    }
+    .notif-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 21px;
+      background: #FFEBEE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C62828;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .notif-text {
+      flex: 1;
+      font-size: 0.9rem;
+      color: #262626;
+    }
+    .notif-username {
+      font-weight: 600;
+    }
+    .notif-time {
+      color: #8E8E8E;
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+
+    /* ========== ACCOUNT PAGE STYLES ========== */
+    .account-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #EFEFEF;
+    }
+    .account-item:active {
+      background: #FFEBEE;
+    }
+
+    /* Privacy page */
+    .privacy-item {
+      font-size: 0.95rem;
+    }
+    /* Basic toggle switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px; width: 18px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #E53935;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- LOGIN/SIGN UP PAGE -->
+  <div id="loginPage" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #F8F8F8; z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div style="width: 90%; max-width: 350px; display: flex; flex-direction: column; gap: 24px;">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <img src="favicon.png" class="anim-appear-grow" style="width: 120px; height: auto; margin: 0 auto 24px auto;">
+        <h2 id="loginHeading" class="anim-slide-from-top" style="font-weight: 700; color: #262626; font-size: 2rem; margin-top: 12px;">Login</h2>
+      </div>
+      <!-- Login form -->
+      <div id="loginFormFields" style="display: flex; flex-direction: column; gap: 12px;">
+        <label for="loginUsername" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Username or Email</label>
+        <input type="text" id="loginUsername" class="anim-appear-grow" placeholder="Username or Email" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;">
+        
+        <label for="loginPassword" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Password</label>
+        <div style="position: relative;">
+          <input type="password" id="loginPassword" class="anim-appear-grow" placeholder="Password" style="padding: 16px 42px 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white; width: 100%;">
+          <span class="toggle-password" data-target="loginPassword" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8E8E8E; font-size: 1.1rem;">
+            <i class="far fa-eye"></i>
+          </span>
+        </div>
+        
+        <button id="loginBtn" class="anim-scale-grow" style="background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); color: white; border: none; border-radius: 30px; box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3); padding: 16px; font-weight: 600; font-size: 1.1rem; cursor: pointer; opacity: 0.7; pointer-events: none; margin-top: 16px; transition: opacity 0.2s;">Log in</button>
+      </div>
+      <!-- Sign up form (initially hidden) -->
+      <div id="signupFormFields" style="display: none; flex-direction: column; gap: 12px;">
+        <label for="signupFullName" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Full Name</label>
+        <input type="text" id="signupFullName" class="anim-appear-grow" placeholder="Full Name" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;">
+        
+        <label for="signupUsername" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Username</label>
+        <input type="text" id="signupUsername" class="anim-appear-grow" placeholder="Username" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;">
+        
+        <label for="signupEmail" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Email</label>
+        <input type="email" id="signupEmail" class="anim-appear-grow" placeholder="Email" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;">
+        
+        <label for="signupPassword" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Password</label>
+        <div style="position: relative;">
+          <input type="password" id="signupPassword" class="anim-appear-grow" placeholder="Password" style="padding: 16px 42px 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white; width: 100%;">
+          <span class="toggle-password" data-target="signupPassword" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8E8E8E; font-size: 1.1rem;">
+            <i class="far fa-eye"></i>
+          </span>
+        </div>
+        
+        <button id="signupBtn" class="anim-scale-grow" style="background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); color: white; border: none; border-radius: 30px; box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3); padding: 16px; font-weight: 600; font-size: 1.1rem; cursor: pointer; opacity: 0.7; pointer-events: none; margin-top: 16px; transition: opacity 0.2s;">Sign up</button>
+      </div>
+      <div class="anim-slide-from-top" style="text-align: center; margin-top: 12px;">
+        <span style="color: #8E8E8E; font-size: 0.9rem;">
+          <span id="toggleText">Don't have an account?</span> 
+          <a href="#" id="toggleLink" style="color: #E53935; font-weight: 600; text-decoration: none;">Sign up</a>
+        </span>
+      </div>
+      <div style="text-align: center; margin-top: 16px;">
+        <a href="#" id="lewatiLink" class="anim-slide-from-top" style="color: #E53935; font-weight: 600; text-decoration: none; font-size: 0.9rem;">Lewati</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIODATA SETUP PAGE (shown first) -->
+  <div id="biodataSetupPage" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 3001; display: none; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="anim-slide-from-left" style="position: absolute; top: 20px; left: 20px; cursor: pointer; z-index: 10;" onclick="document.getElementById('biodataSetupPage').style.display='none'; document.getElementById('loginPage').style.display='flex';">
+      <i class="fas fa-arrow-left" style="font-size: 1.5rem; color: #C62828;"></i>
+    </div>
+    <div style="width: 90%; max-width: 350px; display: flex; flex-direction: column; gap: 24px;">
+      <h2 class="anim-slide-from-top" style="font-weight: 700; color: #262626; text-align: center;">Complete Your Profile</h2>
+      
+      <label for="biodataName" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Name</label>
+      <input type="text" id="biodataName" class="anim-appear-grow" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;" placeholder="Your full name">
+      
+      <label for="biodataUsername" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Username</label>
+      <input type="text" id="biodataUsername" class="anim-appear-grow" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;" placeholder="Choose a username">
+      
+      <label for="biodataBio" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Bio</label>
+      <input type="text" id="biodataBio" class="anim-appear-grow" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;" placeholder="Tell us about yourself">
+      
+      <label for="biodataLink" class="anim-slide-from-bottom" style="font-size: 1rem; font-weight: 500; color: #585858; margin-top: 16px; margin-bottom: 8px; display: block;">Link</label>
+      <input type="url" id="biodataLink" class="anim-appear-grow" style="padding: 16px 14px; border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15); font-size: 1rem; outline: none; background: white;" placeholder="https://yourwebsite.com">
+      
+      <div style="display: flex; gap: 12px; width: 100%; margin-top: 16px;">
+        <button id="biodataSkipBtn" class="anim-appear-grow" style="flex: 1; padding: 14px; border: 1px solid #DBDBDB; border-radius: 30px; background: white; color: #585858; font-weight: 600; font-size: 0.95rem; cursor: pointer;">Lewati</button>
+        <button id="biodataSaveBtn" class="anim-scale-grow" style="flex: 1; padding: 14px; border: none; border-radius: 30px; background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); color: white; font-weight: 600; font-size: 0.95rem; cursor: pointer; opacity: 0.7; pointer-events: none;">Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETUP PROFILE PHOTO PAGE (shown second) -->
+  <div id="setupProfilePage" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 3002; display: none; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="anim-slide-from-left" style="position: absolute; top: 20px; left: 20px; cursor: pointer; z-index: 10;" onclick="document.getElementById('setupProfilePage').style.display='none'; document.getElementById('biodataSetupPage').style.display='flex';">
+      <i class="fas fa-arrow-left" style="font-size: 1.5rem; color: #C62828;"></i>
+    </div>
+    <div style="width: 90%; max-width: 350px; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+      <h2 class="anim-slide-from-bottom" style="font-weight: 700; color: #262626;">Add Profile Photo</h2>
+      
+      <!-- Circular photo preview -->
+      <div id="setupPhotoPreview" class="anim-appear-grow" style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; border: none;">
+        <i class="fas fa-camera" style="font-size: 3rem; color: white;"></i>
+      </div>
+      
+      <input type="file" id="setupPhotoInput" accept="image/*" style="display: none;">
+      
+      <div style="display: flex; gap: 12px; width: 100%;">
+        <button id="setupSkipBtn" class="anim-appear-grow" style="flex: 1; padding: 14px; border: 1px solid #DBDBDB; border-radius: 30px; background: white; color: #585858; font-weight: 600; font-size: 0.95rem; cursor: pointer;">Lewati</button>
+        <button id="setupSaveBtn" class="anim-scale-grow" style="flex: 1; padding: 14px; border: none; border-radius: 30px; background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); color: white; font-weight: 600; font-size: 0.95rem; cursor: pointer; opacity: 0.7; pointer-events: none;">Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+      <div class="app-header">
+        <div class="header-left">
+          <div class="profile-icon" id="homeProfileIcon"><i class="fas fa-user"></i></div>
+          <div class="greeting">
+            <h2>Hello, Alex</h2>
+            <p>ready for a fresh run</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="notification-icon" id="notificationIcon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-card">
+        <div class="gold-header">
+          <div class="step-value">gold III</div>
+          <button class="update-btn" id="updateGoldBtn">Update</button>
+        </div>
+        <div class="progress-bg"><div class="progress-fill"></div></div>
+        <div class="progress-stats-row">
+          <span class="progress-stat-left">32 stars</span>
+        </div>
+      </div>
+
+      <!-- Day toggle buttons with slide animation -->
+      <div class="day-toggle-wrapper">
+        <div class="day-toggle" id="dayToggle">
+          <button class="day-btn active" data-day="mon">Mon</button>
+          <button class="day-btn" data-day="tue">Tue</button>
+          <button class="day-btn" data-day="wed">Wed</button>
+          <button class="day-btn" data-day="thu">Thu</button>
+          <button class="day-btn" data-day="fri">Fri</button>
+          <button class="day-btn" data-day="sat">Sat</button>
+          <button class="day-btn" data-day="sun">Sun</button>
+          <div class="sliding-border" id="daySlidingBorder"></div>
+        </div>
+      </div>
+
+      <!-- Day Content Slider Container -->
+      <div class="day-slider-container">
+        <div class="day-slider-track" id="daySliderTrack">
+          <!-- MONDAY -->
+          <div class="day-slide" data-day="mon">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Easy Run + Form Drills</h3>
+              <span id="progressText" class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListMon"></div>
+          </div>
+          <!-- TUESDAY -->
+          <div class="day-slide" data-day="tue">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Interval Speed Work</h3>
+              <span class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListTue"></div>
+          </div>
+          <!-- WEDNESDAY -->
+          <div class="day-slide" data-day="wed">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Recovery Run or Cross-Train</h3>
+              <span class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListWed"></div>
+          </div>
+          <!-- THURSDAY -->
+          <div class="day-slide" data-day="thu">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Tempo Run</h3>
+              <span class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListThu"></div>
+          </div>
+          <!-- FRIDAY -->
+          <div class="day-slide" data-day="fri">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Long Run</h3>
+              <span class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListFri"></div>
+          </div>
+          <!-- SATURDAY -->
+          <div class="day-slide" data-day="sat">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Hill Repeats</h3>
+              <span class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListSat"></div>
+          </div>
+          <!-- SUNDAY -->
+          <div class="day-slide" data-day="sun">
+            <div class="section-title" style="margin-top: 4px;">
+              <h3>Rest & Stretch</h3>
+              <span class="customize-link">Customize <i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div class="activity-list" id="activityListSun"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATION PAGE (initially hidden) -->
+    <div id="notificationsPage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="notifBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">Notifications</h3>
+      </div>
+      <div id="notificationsList" style="display:flex; flex-direction:column; gap:0;"></div>
+    </div>
+
+    <!-- ACCOUNT PAGE (initially hidden) -->
+    <div id="accountsPage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="accountBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">Accounts</h3>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <!-- Sample account list -->
+        <div class="account-item anim-slide-from-left" style="animation-delay: 0.1s;">
+          <div class="notif-avatar"><i class="fas fa-user-circle"></i></div>
+          <div>
+            <div class="notif-username">Alex Rivera</div>
+            <div style="font-size:0.8rem; color:#8E8E8E;">alex@vitalis.health</div>
+          </div>
+          <span style="margin-left:auto; color:#E53935; font-weight:600; font-size:0.9rem;">Current</span>
+        </div>
+        <div class="account-item anim-slide-from-left" style="animation-delay: 0.2s; cursor:pointer;">
+          <div class="notif-avatar" style="background:#E8E8E8;"><i class="fas fa-user-plus" style="color:#8E8E8E;"></i></div>
+          <div>
+            <div class="notif-username">Add Account</div>
+            <div style="font-size:0.8rem; color:#8E8E8E;">Switch or create new</div>
+          </div>
+          <i class="fas fa-chevron-right" style="margin-left:auto; color:#8E8E8E; font-size:0.8rem;"></i>
+        </div>
+        <div style="padding:20px 0; text-align:center;">
+          <button id="logoutBtn" class="anim-appear-grow" style="background: #FFEBEE; color: #C62828; border: none; border-radius: 30px; padding: 12px 24px; font-weight: 600; font-size: 0.9rem; cursor: pointer;">Log out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCOUNT PRIVACY PAGE (initially hidden) -->
+    <div id="privacyPage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="privacyBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">Account Privacy</h3>
+      </div>
+      <div style="padding: 16px 0;">
+        <p class="anim-slide-from-left" style="color: #585858; margin-bottom: 12px;">Manage your privacy settings here.</p>
+        <!-- Placeholder privacy options -->
+        <div class="privacy-item anim-slide-from-left" style="animation-delay: 0.1s; display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid #EFEFEF;">
+          <span>Private Account</span>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="privacy-item anim-slide-from-left" style="animation-delay: 0.2s; display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid #EFEFEF;">
+          <span>Show Activity Status</span>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT PAGE (initially hidden) -->
+    <div id="aboutPage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="aboutBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">About</h3>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <div class="account-item anim-slide-from-left" style="animation-delay: 0.1s; cursor:pointer;" id="aboutAccountLink">
+          <div class="notif-avatar"><i class="fas fa-file-alt"></i></div>
+          <div>
+            <div class="notif-username">About your account</div>
+            <div style="font-size:0.8rem; color:#8E8E8E;">Manage your account settings, security, and preferences.</div>
+          </div>
+          <i class="fas fa-chevron-right" style="margin-left:auto; color:#8E8E8E; font-size:0.8rem;"></i>
+        </div>
+        <div class="account-item anim-slide-from-left" style="animation-delay: 0.2s; cursor:pointer;" id="privacyPolicyLink">
+          <div class="notif-avatar"><i class="fas fa-shield-alt"></i></div>
+          <div>
+            <div class="notif-username">Privacy Policy</div>
+            <div style="font-size:0.8rem; color:#8E8E8E;">Read our privacy practices and terms of service.</div>
+          </div>
+          <i class="fas fa-chevron-right" style="margin-left:auto; color:#8E8E8E; font-size:0.8rem;"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIVACY POLICY PAGE (initially hidden) -->
+    <div id="privacyPolicyPage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="privacyPolicyBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">Privacy Policy</h3>
+      </div>
+      <div style="padding:16px 0;">
+        <p style="color:#585858; font-size:0.9rem; line-height:1.5;">
+          This is the privacy policy page. You can place your privacy policy text here.
+        </p>
+      </div>
+    </div>
+
+    <!-- ABOUT YOUR ACCOUNT PAGE (initially hidden) -->
+    <div id="aboutAccountPage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="aboutAccountBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">About your account</h3>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; padding:20px 0;">
+        <!-- Centered icon -->
+        <div style="width:80px; height:80px; border-radius:50%; background:#FFEBEE; display:flex; align-items:center; justify-content:center; color:#C62828; font-size:2.5rem;">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <!-- Username below icon -->
+        <div style="font-weight:700; color:#262626; font-size:1.1rem; margin-top:12px;">alex_rivera</div>
+        <!-- Date Joined list item -->
+        <div style="width:100%; margin-top:20px;">
+          <div class="account-item" style="padding:12px 0; border-bottom:1px solid #EFEFEF;">
+            <span style="font-size:0.9rem; color:#262626;">Date Joined</span>
+            <span style="margin-left:auto; color:#8E8E8E; font-size:0.9rem;">March 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOMIZE PAGE (initially hidden) -->
+    <div id="customizePage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="customizeBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">Customize Training</h3>
+      </div>
+      <!-- Day selector -->
+      <div class="day-toggle-wrapper" style="margin-top: 8px;">
+        <div class="day-toggle" id="customizeDayToggle">
+          <button class="day-btn active" data-day="mon">Mon</button>
+          <button class="day-btn" data-day="tue">Tue</button>
+          <button class="day-btn" data-day="wed">Wed</button>
+          <button class="day-btn" data-day="thu">Thu</button>
+          <button class="day-btn" data-day="fri">Fri</button>
+          <button class="day-btn" data-day="sat">Sat</button>
+          <button class="day-btn" data-day="sun">Sun</button>
+          <div class="sliding-border" id="customizeSlidingBorder"></div>
+        </div>
+      </div>
+
+      <!-- Exercise list – will be filled by JS -->
+      <div id="customizeExerciseList" style="margin-top: 16px;"></div>
+      <button id="addExerciseBtn" style="margin-top: 12px; background: #E53935; color: white; border: none; border-radius: 24px; padding: 12px 24px; font-weight: 600; width: 100%; cursor: pointer;">+ Add Exercise</button>
+    </div>
+
+    <!-- UPDATE PAGE (initially hidden) -->
+    <div id="updatePage" class="page" style="display:none;">
+      <div style="display:flex; align-items:center; padding:12px 0 16px; border-bottom:1px solid #EFEFEF; margin-bottom:8px;">
+        <button id="updateBackBtn" style="background:none; border:none; padding:8px; margin-right:12px; cursor:pointer; color:#C62828; font-size:1.3rem;" class="anim-slide-from-left">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 style="font-weight:700; color:#262626; font-size:1.2rem;" class="anim-slide-from-left">Update Gold Status</h3>
+      </div>
+      <div style="padding:16px 0;">
+        <p style="color:#585858; font-size:0.9rem; line-height:1.5;">
+          Sync your latest achievements and update your gold tier progress here.
+        </p>
+      </div>
+    </div>
+
+    <!-- SOCIAL PAGE -->
+    <div id="socialPage" class="page">
+      <div id="socialFeedView">
+        <div class="social-search-header">
+          <div class="search-bar-wrapper">
+            <div class="search-bar">
+              <i class="fas fa-search"></i>
+              <span class="material-symbols-outlined" id="backIcon" style="display: none;">arrow_back</span>
+              <input type="text" id="socialSearchInput" placeholder="Search people..." autocomplete="off">
+            </div>
+            <div class="add-btn-outside" id="addBtnOutside">
+              <span class="material-symbols-outlined">add</span>
+            </div>
+          </div>
+          <!-- Search Dropdown -->
+          <div class="search-dropdown" id="searchDropdown"></div>
+          <!-- Blogs/Posts/Reels Toggle -->
+          <div class="feed-toggle" id="feedToggle">
+            <button class="toggle-btn active" id="blogsToggleBtn">
+              <span class="material-symbols-outlined">article</span>
+            </button>
+            <button class="toggle-btn" id="postsToggleBtn">
+              <span class="material-symbols-outlined">post</span>
+            </button>
+            <button class="toggle-btn" id="reelsToggleBtn">
+              <span class="material-symbols-outlined">video_library</span>
+            </button>
+            <div class="sliding-border" id="feedSlidingBorder"></div>
+          </div>
+        </div>
+        
+        <!-- Feed Slider Container -->
+        <div class="feed-slider-container">
+          <div class="feed-slider-track" id="feedSliderTrack">
+            <!-- Blogs Slide -->
+            <div class="feed-slide">
+              <div id="blogsContainer" class="blogs-container scroll-animate">
+                <div id="blogsList"></div>
+              </div>
+            </div>
+            <!-- Posts Slide -->
+            <div class="feed-slide">
+              <div id="postsGridContainer" class="posts-grid-container scroll-animate">
+                <div id="postsGrid" class="grid-3-col"></div>
+              </div>
+            </div>
+            <!-- Reels Slide -->
+            <div class="feed-slide">
+              <div id="reelsGridContainer" class="reels-grid-container scroll-animate">
+                <div id="reelsGrid" class="grid-3-col"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="profileViewInSocial" style="display: none;"></div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div id="profilePage" class="page">
+      <div class="profile-header">
+        <div class="profile-left">
+          <div class="profile-avatar"><i class="fas fa-user"></i></div>
+          <div class="profile-info">
+            <div class="profile-name-row">
+              <h2 style="color: #585858;">Alex Rivera</h2>
+              <span class="gold-badge">gold III</span>
+            </div>
+            <p>alex@vitalis.health</p>
+            <p>32 years · 178 cm · 74 kg</p>
+            <p><a href="#" style="color: #EF5350; text-decoration: none; font-size: 0.85rem;">yourwebsite.com</a></p>
+          </div>
+        </div>
+        <div class="profile-header-right">
+          <div class="profile-add-icon" id="profileAddIcon">
+            <span class="material-symbols-outlined">add</span>
+          </div>
+          <div class="profile-menu-icon" id="profileMenuIcon">
+            <span class="material-symbols-outlined">menu</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="profile-actions-container">
+        <button class="profile-action-btn" id="editProfileBtn">
+          <i class="fas fa-pen"></i>
+          Edit Profile
+        </button>
+        <button class="profile-action-btn" id="shareProfileBtn">
+          <i class="fas fa-share-alt"></i>
+          Share Profile
+        </button>
+      </div>
+      
+      <!-- Profile Toggle -->
+      <div class="profile-toggle" id="profileToggle">
+        <button class="toggle-btn active" id="profileBlogsToggleBtn">
+          <span class="material-symbols-outlined">article</span>
+        </button>
+        <button class="toggle-btn" id="profilePostsToggleBtn">
+          <span class="material-symbols-outlined">post</span>
+        </button>
+        <button class="toggle-btn" id="profileReelsToggleBtn">
+          <span class="material-symbols-outlined">video_library</span>
+        </button>
+        <div class="sliding-border" id="profileSlidingBorder"></div>
+      </div>
+      
+      <!-- Profile Slider Container -->
+      <div class="profile-slider-container">
+        <div class="profile-slider-track" id="profileSliderTrack">
+          <!-- My Blogs Slide -->
+          <div class="profile-slide">
+            <div id="myBlogsContainer" class="blogs-container scroll-animate">
+              <div id="myBlogsList"></div>
+            </div>
+          </div>
+          <!-- My Posts Slide -->
+          <div class="profile-slide">
+            <div id="myPostsGridContainer" class="posts-grid-container scroll-animate">
+              <div id="myPostsGrid" class="grid-3-col"></div>
+            </div>
+          </div>
+          <!-- My Reels Slide -->
+          <div class="profile-slide">
+            <div id="myReelsGridContainer" class="reels-grid-container scroll-animate">
+              <div id="myReelsGrid" class="grid-3-col"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav" id="bottomNav">
+    <div class="nav-item active" data-page="home"><span class="material-symbols-outlined">home</span></div>
+    <div class="nav-item" data-page="social"><span class="material-symbols-outlined">group</span></div>
+    <div class="nav-item" data-page="profile"><span class="material-symbols-outlined">person</span></div>
+  </div>
+</div>
+
+<!-- Floating Mascot Icon -->
+<div class="floating-person-icon" id="floatingPersonIcon">
+  <img src="mascot.png" alt="Mascot" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-person\' style=\'font-size: 2rem; color: white; background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); width: 60px; height: 60px; border-radius: 30px; display: flex; align-items: center; justify-content: center;\'></i>';">
+</div>
+
+<!-- Full-screen Modal -->
+<div id="fullscreenModal" class="fullscreen-modal">
+  <div class="modal-header">
+    <div class="modal-header-left">
+      <button class="modal-back-btn" id="modalBackBtn">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+  <div class="modal-scroll-container" id="modalScrollContainer"></div>
+</div>
+
+<!-- Instagram-style Profile Menu Modal -->
+<div id="profileMenuModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2001; display: none; align-items: flex-end; transition: opacity 0.2s;">
+  <div style="background: white; width: 100%; border-top-left-radius: 16px; border-top-right-radius: 16px; padding: 8px 0 20px; max-height: 70vh; overflow-y: auto; transform: translateY(100%); transition: transform 0.3s ease-out;" id="menuSheet">
+    <div id="menuDragHandle" style="width: 100%; height: 40px; display: flex; align-items: center; justify-content: center; touch-action: none; cursor: grab;">
+      <div style="width: 40px; height: 4px; background: #DADADA; border-radius: 2px;"></div>
+    </div>
+    <div id="menuItemsContainer"></div>
+  </div>
+</div>
+
+<!-- Chatbot Modal -->
+<div id="chatbotModal" style="position: fixed; bottom: 80px; right: 20px; width: 340px; max-width: 90vw; height: 450px; max-height: 60vh; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); z-index: 1500; display: none; flex-direction: column; overflow: hidden;">
+  <div style="background: linear-gradient(135deg, #FFCDD2 0%, #E53935 100%); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+    <span style="font-weight: 700; font-size: 1rem;">Fittmore Assistant</span>
+    <button id="chatbotCloseBtn" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">✕</button>
+  </div>
+  <div id="chatMessages" style="flex: 1; overflow-y: auto; padding: 12px; background: #F8F8F8; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+    <!-- Messages will appear here -->
+  </div>
+  <div style="display: flex; border-top: 1px solid #EFEFEF; padding: 8px;">
+    <input type="text" id="chatInput" placeholder="Type a message..." style="flex: 1; border: 1px solid #E0E0E0; border-radius: 20px; padding: 10px 16px; outline: none; font-family: inherit; font-size: 0.9rem;">
+    <button id="chatSendBtn" style="background: linear-gradient(135deg, #FFCDD2, #E53935); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; margin-left: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">➤</button>
+  </div>
+</div>
+
+<!-- Create Modal (Post/Reel/Blog) -->
+<div id="createPostModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 2002; display: none; flex-direction: column;">
+  <!-- Header -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #EFEFEF;">
+    <button id="createPostCloseBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #C62828; animation: slideFromLeft 0.3s ease both;"><i class="fas fa-arrow-left"></i></button>
+    <span id="createModalTitle" style="font-weight: 600; font-size: 1rem; color: #262626;">New Blog</span>
+    <button id="createPostNextBtn" style="background: none; border: none; color: #0095F6; font-weight: 600; font-size: 0.95rem; cursor: pointer; opacity: 0.5; pointer-events: none;">Upload</button>
+  </div>
+  
+  <!-- Tab buttons -->
+  <div style="display: flex; border-bottom: 1px solid #EFEFEF;" id="createModalTabs">
+    <button class="create-tab-btn active" data-tab="blog">Blog</button>
+    <button class="create-tab-btn" data-tab="post">Post</button>
+    <button class="create-tab-btn" data-tab="reel">Reel</button>
+    <div class="sliding-border" id="createModalSlidingBorder"></div>
+  </div>
+  
+  <!-- Tab content areas -->
+  <div style="flex: 1; overflow-y: auto;">
+    <!-- Blog Tab -->
+    <div class="create-tab-panel active" data-tab="blog" style="display: flex; height: 100%; background: #FAFAFA;">
+      <div style="padding: 24px; height: 100%; display: flex; flex-direction: column; width: 100%;">
+        <input type="text" id="blogTitleInput" placeholder="Blog title" style="width: 100%; border: none; border-bottom: 1px solid #EFEFEF; padding: 12px 0; font-size: 1.2rem; font-weight: 600; outline: none; margin-bottom: 16px; background: transparent;">
+        <textarea id="blogContentInput" placeholder="Write your blog..." style="flex: 1; width: 100%; border: none; resize: none; outline: none; font-family: inherit; font-size: 1rem; line-height: 1.6; background: transparent; padding: 0;"></textarea>
+      </div>
+    </div>
+    <!-- Post Tab -->
+    <div class="create-tab-panel" data-tab="post" style="display: none; flex-direction: column; height: 100%; background: #FAFAFA;">
+      <input type="file" id="postFileInput" accept="image/*" style="display: none;">
+      <label for="postFileInput" id="postFileLabel" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;">
+        <i class="fas fa-image" style="font-size: 4rem; color: #C0C0C0; margin-bottom: 16px;"></i>
+        <span>Tap to select a photo</span>
+      </label>
+      <div id="postPreviewContainer" style="display: none; flex: 1; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;">
+        <img id="postPreview" src="#" alt="Preview" style="display: none; width: 100%; max-height: 60vh; object-fit: contain;">
+      </div>
+      <div id="postCaptionWrapper" style="display: none; padding: 12px 16px; border-top: 1px solid #EFEFEF;">
+        <input type="text" id="postCaptionInput" placeholder="Write a caption..." style="width: 100%; border: none; outline: none; font-family: inherit; font-size: 1rem; background: transparent;">
+      </div>
+    </div>
+    <!-- Reel Tab -->
+    <div class="create-tab-panel" data-tab="reel" style="display: none; flex-direction: column; height: 100%; background: #FAFAFA;">
+      <input type="file" id="reelFileInput" accept="video/*" style="display: none;">
+      <label for="reelFileInput" id="reelFileLabel" style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;">
+        <i class="fas fa-video" style="font-size: 4rem; color: #C0C0C0; margin-bottom: 16px;"></i>
+        <span>Tap to select a video</span>
+      </label>
+      <div id="reelPreviewContainer" style="display: none; flex: 1; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;">
+        <video id="reelPreview" src="#" controls style="display: none; width: 100%; max-height: 60vh; object-fit: contain;"></video>
+      </div>
+      <div id="reelCaptionWrapper" style="display: none; padding: 12px 16px; border-top: 1px solid #EFEFEF;">
+        <input type="text" id="reelCaptionInput" placeholder="Write a caption..." style="width: 100%; border: none; outline: none; font-family: inherit; font-size: 1rem; background: transparent;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    // Login/Sign up handling
+    const loginPage = document.getElementById('loginPage');
+    const loginFormFields = document.getElementById('loginFormFields');
+    const signupFormFields = document.getElementById('signupFormFields');
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const toggleLink = document.getElementById('toggleLink');
+    const toggleText = document.getElementById('toggleText');
+    const loginHeading = document.getElementById('loginHeading');
+    const mainContent = document.querySelector('.main-content');
+
+    let isLogin = true; // track current mode
+
+    // Login inputs
+    const loginUsername = document.getElementById('loginUsername');
+    const loginPassword = document.getElementById('loginPassword');
+    // Signup inputs
+    const signupFullName = document.getElementById('signupFullName');
+    const signupUsername = document.getElementById('signupUsername');
+    const signupEmail = document.getElementById('signupEmail');
+    const signupPassword = document.getElementById('signupPassword');
+
+    // Password visibility toggle
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+      icon.addEventListener('click', function() {
+        const input = document.getElementById(this.dataset.target);
+        if (input.type === 'password') {
+          input.type = 'text';
+          this.innerHTML = '<i class="far fa-eye-slash"></i>';
+        } else {
+          input.type = 'password';
+          this.innerHTML = '<i class="far fa-eye"></i>';
+        }
+      });
+    });
+
+    function checkLoginInputs() {
+      if (loginUsername.value.trim() && loginPassword.value.trim()) {
+        loginBtn.style.opacity = '1';
+        loginBtn.style.pointerEvents = 'auto';
+      } else {
+        loginBtn.style.opacity = '0.7';
+        loginBtn.style.pointerEvents = 'none';
+      }
+    }
+
+    function checkSignupInputs() {
+      if (signupFullName.value.trim() && signupUsername.value.trim() && signupEmail.value.trim() && signupPassword.value.trim()) {
+        signupBtn.style.opacity = '1';
+        signupBtn.style.pointerEvents = 'auto';
+      } else {
+        signupBtn.style.opacity = '0.7';
+        signupBtn.style.pointerEvents = 'none';
+      }
+    }
+
+    // Toggle between forms
+    toggleLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (isLogin) {
+        isLogin = false;
+        loginFormFields.style.display = 'none';
+        signupFormFields.style.display = 'flex';
+        toggleText.textContent = 'Have an account?';
+        toggleLink.textContent = 'Log in';
+        loginHeading.textContent = 'Sign Up';
+      } else {
+        isLogin = true;
+        loginFormFields.style.display = 'flex';
+        signupFormFields.style.display = 'none';
+        toggleText.textContent = "Don't have an account?";
+        toggleLink.textContent = 'Sign up';
+        loginHeading.textContent = 'Login';
+      }
+
+      // Re‑animate heading
+      loginHeading.classList.remove('anim-slide-from-top');
+      void loginHeading.offsetWidth;
+      loginHeading.classList.add('anim-slide-from-top');
+
+      // Re‑animate profile icon
+      const profileIconAnim = document.querySelector('#loginPage .anim-appear-grow');
+      if (profileIconAnim) {
+        profileIconAnim.classList.remove('anim-appear-grow');
+        void profileIconAnim.offsetWidth;
+        profileIconAnim.classList.add('anim-appear-grow');
+      }
+
+      // Re‑animate fields inside the visible form
+      const visibleForm = isLogin ? loginFormFields : signupFormFields;
+      visibleForm.querySelectorAll('.anim-slide-from-bottom').forEach(el => {
+        el.classList.remove('anim-slide-from-bottom');
+        void el.offsetWidth;
+        el.classList.add('anim-slide-from-bottom');
+      });
+      visibleForm.querySelectorAll('.anim-appear-grow').forEach(el => {
+        el.classList.remove('anim-appear-grow');
+        void el.offsetWidth;
+        el.classList.add('anim-appear-grow');
+      });
+
+      // Re‑animate "Don't have an account?" / "Have an account?" container
+      const toggleContainer = document.querySelector('#loginPage .anim-slide-from-top[style*="margin-top: 12px"]');
+      if (toggleContainer) {
+        toggleContainer.classList.remove('anim-slide-from-top');
+        void toggleContainer.offsetWidth;
+        toggleContainer.classList.add('anim-slide-from-top');
+      }
+    });
+
+    // --- Setup Profile Photo Page ---
+    const setupProfilePage = document.getElementById('setupProfilePage');
+    const setupPhotoInput = document.getElementById('setupPhotoInput');
+    const setupPhotoPreview = document.getElementById('setupPhotoPreview');
+    const setupSkipBtn = document.getElementById('setupSkipBtn');
+    const setupSaveBtn = document.getElementById('setupSaveBtn');
+    let setupPhotoDataUrl = null;
+
+    // --- Biodata Setup Page ---
+    const biodataSetupPage = document.getElementById('biodataSetupPage');
+    const biodataSkipBtn = document.getElementById('biodataSkipBtn');
+    const biodataSaveBtn = document.getElementById('biodataSaveBtn');
+    const biodataName = document.getElementById('biodataName');
+    const biodataUsername = document.getElementById('biodataUsername');
+    const biodataBio = document.getElementById('biodataBio');
+    const biodataLink = document.getElementById('biodataLink');
+
+    // Open the bio page first (called after signup or lewati)
+    function openSetupProfilePage() {
+      const homePage = document.getElementById('homePage');
+      homePage.classList.add('anim-fade-in');
+      loginPage.style.display = 'none';
+      biodataSetupPage.style.display = 'flex';
+
+      // Reflow paksa
+      mainContent.style.display = 'none';
+      void mainContent.offsetHeight;
+      mainContent.style.display = '';
+    }
+
+    // Photo page - click on preview to open file picker
+    setupPhotoPreview.addEventListener('click', () => {
+      setupPhotoInput.click();
+    });
+
+    // Photo page - handle file selection
+    setupPhotoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          setupPhotoDataUrl = ev.target.result;
+          setupPhotoPreview.innerHTML = `<img src="${setupPhotoDataUrl}" style="width:100%;height:100%;object-fit:cover;">`;
+          setupSaveBtn.style.opacity = '1';
+          setupSaveBtn.style.pointerEvents = 'auto';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Photo page Skip button -> go straight to home
+    setupSkipBtn.addEventListener('click', () => {
+      setupProfilePage.style.display = 'none';
+      setupPhotoInput.value = '';
+      setupPhotoPreview.innerHTML = '<i class="fas fa-camera" style="font-size: 3rem; color: white;"></i>';
+      setupSaveBtn.style.opacity = '0.7';
+      setupSaveBtn.style.pointerEvents = 'none';
+      setupPhotoDataUrl = null;
+
+      // Reflow main content to replay animations
+      mainContent.style.display = 'none';
+      void mainContent.offsetHeight;
+      mainContent.style.display = '';
+    });
+
+    // Photo page Save button -> go straight to home
+    setupSaveBtn.addEventListener('click', () => {
+      setupProfilePage.style.display = 'none';
+      setupPhotoInput.value = '';
+      setupPhotoPreview.innerHTML = '<i class="fas fa-camera" style="font-size: 3rem; color: white;"></i>';
+      setupSaveBtn.style.opacity = '0.7';
+      setupSaveBtn.style.pointerEvents = 'none';
+      setupPhotoDataUrl = null;
+
+      // Reflow main content
+      mainContent.style.display = 'none';
+      void mainContent.offsetHeight;
+      mainContent.style.display = '';
+    });
+
+    // Enable bio save button when at least name or username is filled
+    function checkBiodataInputs() {
+      if (biodataName.value.trim() || biodataUsername.value.trim()) {
+        biodataSaveBtn.style.opacity = '1';
+        biodataSaveBtn.style.pointerEvents = 'auto';
+      } else {
+        biodataSaveBtn.style.opacity = '0.7';
+        biodataSaveBtn.style.pointerEvents = 'none';
+      }
+    }
+    biodataName.addEventListener('input', checkBiodataInputs);
+    biodataUsername.addEventListener('input', checkBiodataInputs);
+
+    // Bio Skip -> show photo page
+    biodataSkipBtn.addEventListener('click', () => {
+      biodataSetupPage.style.display = 'none';
+      document.getElementById('setupProfilePage').style.display = 'flex';
+
+      // reset photo page to its initial state
+      setupPhotoInput.value = '';
+      setupPhotoPreview.innerHTML = '<i class="fas fa-camera" style="font-size: 3rem; color: white;"></i>';
+      setupSaveBtn.style.opacity = '0.7';
+      setupSaveBtn.style.pointerEvents = 'none';
+      setupPhotoDataUrl = null;
+    });
+
+    // Bio Save -> show photo page
+    biodataSaveBtn.addEventListener('click', () => {
+      biodataSetupPage.style.display = 'none';
+      document.getElementById('setupProfilePage').style.display = 'flex';
+
+      setupPhotoInput.value = '';
+      setupPhotoPreview.innerHTML = '<i class="fas fa-camera" style="font-size: 3rem; color: white;"></i>';
+      setupSaveBtn.style.opacity = '0.7';
+      setupSaveBtn.style.pointerEvents = 'none';
+      setupPhotoDataUrl = null;
+    });
+
+    // Lewati (skip) link handler - now opens bio page first
+    document.getElementById('lewatiLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      openSetupProfilePage();
+    });
+
+    loginUsername.addEventListener('input', checkLoginInputs);
+    loginPassword.addEventListener('input', checkLoginInputs);
+    loginBtn.addEventListener('click', () => {
+      const homePage = document.getElementById('homePage');
+      homePage.classList.add('anim-fade-in');
+      loginPage.style.display = 'none';
+
+      // Reflow paksa
+      mainContent.style.display = 'none';
+      void mainContent.offsetHeight;
+      mainContent.style.display = '';
+    });
+
+    signupFullName.addEventListener('input', checkSignupInputs);
+    signupUsername.addEventListener('input', checkSignupInputs);
+    signupEmail.addEventListener('input', checkSignupInputs);
+    signupPassword.addEventListener('input', checkSignupInputs);
+    signupBtn.addEventListener('click', () => {
+      openSetupProfilePage();
+    });
+
+    // DOM Elements
+    const progressText = document.getElementById('progressText');
+    const postsGrid = document.getElementById('postsGrid');
+    const reelsGrid = document.getElementById('reelsGrid');
+    const blogsList = document.getElementById('blogsList');
+    const myPostsGrid = document.getElementById('myPostsGrid');
+    const myReelsGrid = document.getElementById('myReelsGrid');
+    const myBlogsList = document.getElementById('myBlogsList');
+    const searchInput = document.getElementById('socialSearchInput');
+    const searchIcon = document.querySelector('.search-bar .fa-search');
+    const backIcon = document.getElementById('backIcon');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const addBtnOutside = document.getElementById('addBtnOutside');
+    const socialFeedView = document.getElementById('socialFeedView');
+    const profileViewInSocial = document.getElementById('profileViewInSocial');
+    const postsToggleBtn = document.getElementById('postsToggleBtn');
+    const blogsToggleBtn = document.getElementById('blogsToggleBtn');
+    const reelsToggleBtn = document.getElementById('reelsToggleBtn');
+    const profilePostsToggleBtn = document.getElementById('profilePostsToggleBtn');
+    const profileBlogsToggleBtn = document.getElementById('profileBlogsToggleBtn');
+    const profileReelsToggleBtn = document.getElementById('profileReelsToggleBtn');
+    
+    // Slider tracks
+    const daySliderTrack = document.getElementById('daySliderTrack');
+    const feedSliderTrack = document.getElementById('feedSliderTrack');
+    const profileSliderTrack = document.getElementById('profileSliderTrack');
+    
+    // Sliding border elements
+    const daySlidingBorder = document.getElementById('daySlidingBorder');
+    const feedSlidingBorder = document.getElementById('feedSlidingBorder');
+    const profileSlidingBorder = document.getElementById('profileSlidingBorder');
+    const createModalSlidingBorder = document.getElementById('createModalSlidingBorder');
+    
+    // Activity list containers
+    const activityLists = {
+      mon: document.getElementById('activityListMon'),
+      tue: document.getElementById('activityListTue'),
+      wed: document.getElementById('activityListWed'),
+      thu: document.getElementById('activityListThu'),
+      fri: document.getElementById('activityListFri'),
+      sat: document.getElementById('activityListSat'),
+      sun: document.getElementById('activityListSun')
+    };
+    
+    // Scroll-triggered animation using Intersection Observer
+    let scrollObserver = null;
+    
+    function initScrollAnimations() {
+      // Disconnect existing observer
+      if (scrollObserver) {
+        scrollObserver.disconnect();
+      }
+      
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -30px 0px'
+      };
+
+      scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            element.classList.add('visible');
+            
+            // Add staggered delays to children
+            if (element.classList.contains('blogs-container') || 
+                element.classList.contains('posts-grid-container') ||
+                element.classList.contains('reels-grid-container')) {
+              const children = element.querySelectorAll('.blog-card, .grid-item');
+              children.forEach((child, index) => {
+                child.style.transitionDelay = `${0.06 * (index + 1)}s`;
+              });
+            }
+            
+            // Unobserve after animation
+            scrollObserver.unobserve(element);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all scroll-animate elements
+      document.querySelectorAll('.scroll-animate').forEach(el => {
+        scrollObserver.observe(el);
+      });
+    }
+    
+    // Function to animate day elements for the selected day (heading removed)
+    function animateDayElements(day) {
+      // Remove animation classes from all day slides (so they can be re-triggered)
+      document.querySelectorAll('.day-slide .anim-slide-from-top, .day-slide .anim-slide-from-left, .day-slide .anim-appear-grow').forEach(el => {
+        el.classList.remove('anim-slide-from-top', 'anim-slide-from-left', 'anim-appear-grow');
+        el.style.animationDelay = '';
+      });
+
+      // Get the currently active day slide
+      const daySlide = document.querySelector(`.day-slide[data-day="${day}"]`);
+      if (!daySlide) return;
+
+      // Animate "Customize" link (slide from left)
+      const span = daySlide.querySelector('.section-title span');
+      if (span) span.classList.add('anim-slide-from-left');
+
+      // Animate activity text and check circles
+      const infos = daySlide.querySelectorAll('.activity-info');
+      const checks = daySlide.querySelectorAll('.activity-check');
+      infos.forEach((info, i) => {
+        info.classList.add('anim-slide-from-left');
+        info.style.animationDelay = `${0.1 * (i + 1)}s`;
+      });
+      checks.forEach((check, i) => {
+        check.classList.add('anim-appear-grow');
+        check.style.animationDelay = `${0.15 * (i + 1)}s`;
+      });
+    }
+    
+    // Floating mascot icon - OPENS CHATBOT with slide animations
+    const floatingPersonIcon = document.getElementById('floatingPersonIcon');
+    const chatbotModal = document.getElementById('chatbotModal');
+    
+    if (floatingPersonIcon) {
+      floatingPersonIcon.addEventListener('click', () => {
+        // If chatbot is already visible, do nothing (close button handles closing)
+        if (chatbotModal.style.display === 'flex') return;
+        
+        // Animate icon out to the right
+        floatingPersonIcon.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        floatingPersonIcon.style.transform = 'translateX(120px) scale(0.5)';
+        floatingPersonIcon.style.opacity = '0';
+        floatingPersonIcon.style.pointerEvents = 'none';
+        
+        // After animation ends, hide icon completely and show chatbot
+        setTimeout(() => {
+          floatingPersonIcon.style.display = 'none';
+        }, 300);
+        
+        // Show chatbot with slide-in from right
+        chatbotModal.style.display = 'flex';
+        chatbotModal.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        chatbotModal.style.transform = 'translateX(100%)';
+        chatbotModal.style.opacity = '0';
+        
+        // Trigger reflow then animate in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            chatbotModal.style.transform = 'translateX(0)';
+            chatbotModal.style.opacity = '1';
+          });
+        });
+        
+        // Auto-scroll to bottom
+        const msgDiv = document.getElementById('chatMessages');
+        if (msgDiv) msgDiv.scrollTop = msgDiv.scrollHeight;
+      });
+    }
+
+    // Chatbot close button - closes with slide animation and brings back icon (FASTER)
+    const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+    if (chatbotCloseBtn) {
+      chatbotCloseBtn.addEventListener('click', () => {
+        // Animate chatbot out to the right
+        chatbotModal.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        chatbotModal.style.transform = 'translateX(100%)';
+        chatbotModal.style.opacity = '0';
+        chatbotModal.style.pointerEvents = 'none';
+        
+        // After animation, hide chatbot and show icon
+        setTimeout(() => {
+          chatbotModal.style.display = 'none';
+          chatbotModal.style.pointerEvents = '';
+          
+          // Show icon with slide-in from right (FASTER)
+          floatingPersonIcon.style.display = 'flex';
+          floatingPersonIcon.style.transition = 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+          floatingPersonIcon.style.transform = 'translateX(120px) scale(0.5)';
+          floatingPersonIcon.style.opacity = '0';
+          floatingPersonIcon.style.pointerEvents = '';
+          
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              floatingPersonIcon.style.transform = 'translateX(0) scale(1)';
+              floatingPersonIcon.style.opacity = '1';
+            });
+          });
+        }, 200);  // Faster delay: 200ms
+      });
+    }
+
+    // Chatbot send & auto-reply
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function addMessage(text, sender) {
+      if (!chatMessages) return;
+      const msgEl = document.createElement('div');
+      msgEl.style.maxWidth = '85%';
+      msgEl.style.padding = '8px 12px';
+      msgEl.style.borderRadius = '16px';
+      msgEl.style.fontSize = '0.85rem';
+      if (sender === 'user') {
+        msgEl.style.alignSelf = 'flex-end';
+        msgEl.style.background = '#E53935';
+        msgEl.style.color = 'white';
+      } else {
+        msgEl.style.alignSelf = 'flex-start';
+        msgEl.style.background = '#E8E8E8';
+        msgEl.style.color = '#262626';
+      }
+      msgEl.textContent = text;
+      chatMessages.appendChild(msgEl);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      chatInput.value = '';
+      // Simple auto-reply
+      setTimeout(() => {
+        addMessage('Thanks for your message! I\'m here to help with your running training. 🏃', 'bot');
+      }, 600);
+    }
+
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    
+    // Prevent context menu on long press
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    // Update button
+    const updateGoldBtn = document.getElementById('updateGoldBtn');
+    if (updateGoldBtn) {
+      updateGoldBtn.addEventListener('click', () => {
+        showUpdatePage();
+      });
+    }
+    
+    // Training data (GYM-FOCUSED)
+  const dayTraining = {
+  mon: { title: 'Push Day', content: 'Chest + Triceps + Shoulders\n\n1. Push-ups (on knees if needed) – 3 sets\n2. Tricep dips (use the edge of your bed or chair) – 3 sets\n3. Pike push-ups (downward dog position, push up) – 3 sets\n\nWarm-up: 5 min jumping jacks + arm circles\nRest between sets: 60-90 seconds\nReps: 8-12 per set', duration: '35 min', calories: '200 cal' },
+  tue: { title: 'Lower Body + Core', content: '1. Bodyweight Squats – 3 sets\n2. Walking Lunges (or stationary) – 3 sets (10 each leg)\n3. Plank – 3 sets (hold 20-40 seconds)\n4. Calf raises (stand on toes) – 3 sets\n\nWarm-up: 5 min jumping jacks\nRest between sets: 60-90 seconds', duration: '30 min', calories: '180 cal' },
+  wed: { title: 'Rest or Light Activity', content: 'Walk, play football/soccer, or just stretch. No heavy training.\n\nActive recovery ideas:\n- 20-30 min walk\n- Light stretching\n- Play sports with friends\n\nRest is when muscles grow!', duration: '20 min', calories: '80 cal' },
+  thu: { title: 'Pull Day', content: 'Back + Biceps\n\n1. Superman holds (lie face down, lift arms & legs) – 3 sets (hold 15-25 sec)\n2. Towel rows (hold towel, pull like rowing) – 3 sets\n3. Bicep curls with water bottles or backpack – 3 sets\n4. Arm circles (forward & backward) – 3 sets\n\nWarm-up: 5 min jumping jacks', duration: '30 min', calories: '170 cal' },
+  fri: { title: 'Full Body Power', content: '1. Push-ups – 3 sets\n2. Squats – 3 sets\n3. Superman holds – 3 sets\n4. Plank – 3 sets\n\nWarm-up: 5 min running in place\nGive it your all today!', duration: '35 min', calories: '220 cal' },
+  sat: { title: 'Active Recovery', content: 'Light walk, stretching, or play any sport you like.\n\nRecovery options:\n- 30 min walk\n- Full body stretch routine\n- Light recreational sports\n\nKeep it fun and low intensity!', duration: '25 min', calories: '90 cal' },
+  sun: { title: 'Full Rest', content: 'Eat well, sleep, let your muscles grow!\n\nRest day priorities:\n- Eat extra protein\n- Sleep 8+ hours\n- Drink lots of water\n- No training\n\nYour muscles grow during rest!', duration: '0 min', calories: '0 cal' }
+};
+
+const dayActivities = {
+  mon: [
+    { id: 'mon1', name: 'Push-ups', desc: '3 sets (on knees if needed)', completed: false },
+    { id: 'mon2', name: 'Tricep dips', desc: '3 sets (use bed/chair edge)', completed: false },
+    { id: 'mon3', name: 'Pike push-ups', desc: '3 sets', completed: false }
+  ],
+  tue: [
+    { id: 'tue1', name: 'Bodyweight Squats', desc: '3 sets', completed: false },
+    { id: 'tue2', name: 'Walking Lunges', desc: '3 sets (10 each leg)', completed: false },
+    { id: 'tue3', name: 'Plank', desc: '3 sets (hold 20-40 sec)', completed: false },
+    { id: 'tue4', name: 'Calf raises', desc: '3 sets', completed: false }
+  ],
+  wed: [
+    { id: 'wed1', name: 'Light Walk', desc: '20-30 min', completed: false },
+    { id: 'wed2', name: 'Stretching', desc: '10-15 min full body', completed: false }
+  ],
+  thu: [
+    { id: 'thu1', name: 'Superman holds', desc: '3 sets (hold 15-25 sec)', completed: false },
+    { id: 'thu2', name: 'Towel rows', desc: '3 sets', completed: false },
+    { id: 'thu3', name: 'Bicep curls', desc: '3 sets with water bottles', completed: false },
+    { id: 'thu4', name: 'Arm circles', desc: '3 sets forward & backward', completed: false }
+  ],
+  fri: [
+    { id: 'fri1', name: 'Push-ups', desc: '3 sets', completed: false },
+    { id: 'fri2', name: 'Squats', desc: '3 sets', completed: false },
+    { id: 'fri3', name: 'Superman holds', desc: '3 sets', completed: false },
+    { id: 'fri4', name: 'Plank', desc: '3 sets', completed: false }
+  ],
+  sat: [
+    { id: 'sat1', name: 'Light Walk', desc: '30 min', completed: false },
+    { id: 'sat2', name: 'Full Body Stretch', desc: '15 min', completed: false },
+    { id: 'sat3', name: 'Recreational Sport', desc: 'Optional - have fun!', completed: false }
+  ],
+  sun: [
+    { id: 'sun1', name: 'Eat Protein-Rich Meals', desc: 'Eggs, chicken, fish, tempe, tofu', completed: false },
+    { id: 'sun2', name: 'Sleep 8+ Hours', desc: 'Essential for recovery', completed: false },
+    { id: 'sun3', name: 'Stay Hydrated', desc: 'Drink plenty of water', completed: false }
+  ]
+};
+
+    let currentDay = 'mon';
+    const dayIndices = { mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6 };
+    
+    // Function to update sliding border position
+    function updateSlidingBorder(border, index, total) {
+      if (border) {
+        border.style.transform = `translateX(${index * 100}%)`;
+      }
+    }
+    
+    // Function to switch day with slide animation (re-animates every time)
+    function switchDay(day) {
+      currentDay = day;
+      const index = dayIndices[day];
+      
+      // Slide the day slider
+      if (daySliderTrack) {
+        daySliderTrack.style.transform = `translateX(-${index * 14.285}%)`;
+      }
+      
+      // Update active button
+      document.querySelectorAll('.day-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+      
+      // Update sliding border
+      updateSlidingBorder(daySlidingBorder, index, 7);
+      
+      // Animate the selected day elements (every time)
+      animateDayElements(day);
+    }
+    
+    // Day toggle buttons
+    const dayBtns = document.querySelectorAll('.day-btn');
+    dayBtns.forEach((btn, index) => {
+      btn.addEventListener('click', function() {
+        const day = this.dataset.day;
+        switchDay(day);
+      });
+    });
+    
+    // Initialize day sliding border
+    setTimeout(() => {
+      updateSlidingBorder(daySlidingBorder, 0, 7);
+    }, 10);
+    
+    // User profiles data
+   const userProfiles = {
+  'Alex Rivera': { name: 'Alex Rivera', email: 'alex@vitalis.health', age: '32 years', height: '178 cm', weight: '74 kg', isCurrentUser: true },
+  'Sarah Johnson': { name: 'Sarah Johnson', email: 'sarah@example.com', age: '28 years', height: '165 cm', weight: '62 kg', isCurrentUser: false, isFollowing: false },
+  'Mike Chen': { name: 'Mike Chen', email: 'mike@example.com', age: '35 years', height: '182 cm', weight: '78 kg', isCurrentUser: false, isFollowing: true },
+  'Emma Williams': { name: 'Emma Williams', email: 'emma@example.com', age: '29 years', height: '170 cm', weight: '64 kg', isCurrentUser: false, isFollowing: false },
+  'David Kim': { name: 'David Kim', email: 'david@fitness.com', age: '27 years', height: '175 cm', weight: '70 kg', isCurrentUser: false, isFollowing: false },
+  'Lisa Brown': { name: 'Lisa Brown', email: 'lisa@wellness.com', age: '31 years', height: '168 cm', weight: '60 kg', isCurrentUser: false, isFollowing: false }
+};
+
+ const allUsers = [
+  { name: 'Alex Rivera', email: 'alex@vitalis.health', avatar: 'A' },
+  { name: 'Sarah Johnson', email: 'sarah@example.com', avatar: 'S' },
+  { name: 'Mike Chen', email: 'mike@example.com', avatar: 'M' },
+  { name: 'Emma Williams', email: 'emma@example.com', avatar: 'E' },
+  { name: 'David Kim', email: 'david@fitness.com', avatar: 'D' },
+  { name: 'Lisa Brown', email: 'lisa@wellness.com', avatar: 'L' }
+];
+    
+    // Search functionality
+    if (searchIcon) {
+      searchIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (searchInput) {
+          searchInput.focus();
+          searchIcon.style.display = 'none';
+          backIcon.style.display = 'block';
+          backIcon.style.animation = 'slideFromLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both';
+          if (searchInput.value.trim() === '') {
+            renderSearchResults(allUsers);
+          }
+          searchDropdown.classList.add('active');
+        }
+      });
+    }
+    
+    if (searchInput && searchDropdown) {
+      let isDropdownOpen = false;
+      
+      searchInput.addEventListener('focus', () => {
+        searchIcon.style.display = 'none';
+        backIcon.style.display = 'block';
+        backIcon.style.animation = 'slideFromLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both';
+        if (searchInput.value.trim() === '') {
+          renderSearchResults(allUsers);
+        }
+        searchDropdown.classList.add('active');
+        isDropdownOpen = true;
+      });
+      
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        if (query === '') {
+          renderSearchResults(allUsers);
+        } else {
+          const filtered = allUsers.filter(user => 
+            user.name.toLowerCase().includes(query) || 
+            user.email.toLowerCase().includes(query)
+          );
+          renderSearchResults(filtered);
+        }
+        isDropdownOpen = true;
+      });
+      
+      document.addEventListener('click', (e) => {
+        if (searchIcon.contains(e.target)) {
+          return;
+        }
+        
+        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target) && !backIcon.contains(e.target)) {
+          searchDropdown.classList.remove('active');
+          if (searchInput.value === '') {
+            searchIcon.style.display = 'block';
+            backIcon.style.display = 'none';
+          }
+          isDropdownOpen = false;
+        }
+      });
+      
+      searchDropdown.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+      });
+      
+      backIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchInput.value = '';
+        searchInput.blur();
+        searchIcon.style.display = 'block';
+        backIcon.style.display = 'none';
+        searchDropdown.classList.remove('active');
+        isDropdownOpen = false;
+        // No content refresh – keep current feed as is
+      });
+      
+      function renderSearchResults(users) {
+        if (users.length === 0) {
+          searchDropdown.innerHTML = '<div class="search-no-results">No results found</div>';
+        } else {
+          let html = '';
+          users.forEach(user => {
+            html += `
+              <div class="search-result-item" data-username="${user.name}">
+                <div class="search-result-avatar">${user.avatar}</div>
+                <div class="search-result-info">
+                  <div class="search-result-name">${user.name}</div>
+                  <div class="search-result-email">${user.email}</div>
+                </div>
+              </div>
+            `;
+          });
+          searchDropdown.innerHTML = html;
+          
+          searchDropdown.querySelectorAll('.search-result-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const userName = item.dataset.username;
+              searchInput.value = '';
+              searchDropdown.classList.remove('active');
+              searchIcon.style.display = 'block';
+              backIcon.style.display = 'none';
+              isDropdownOpen = false;
+              if (userName && userProfiles[userName]) {
+                showProfileInSocial(userName);
+              }
+            });
+          });
+        }
+        searchDropdown.classList.add('active');
+      }
+    }
+    
+    // Plus icon open creation modal
+    function openCreatePost() {
+      document.getElementById('createPostModal').style.display = 'flex';
+    }
+
+    if (addBtnOutside) {
+      addBtnOutside.addEventListener('click', openCreatePost);
+    }
+
+    const profileAddIcon = document.getElementById('profileAddIcon');
+    if (profileAddIcon) {
+      profileAddIcon.addEventListener('click', openCreatePost);
+    }
+    
+    // Sample data (GYM-THEMED)
+    const sampleImages = {
+      running: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&h=400&fit=crop',
+      workout: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop',
+      meal: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop',
+      meditation: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=400&h=400&fit=crop'
+    };
+    
+    const sampleVideos = {
+      meditation: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      workout: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      recipe: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
+    };
+    
+    let allPosts = [
+  { id: 1, userName: 'Sarah Johnson', content: 'Just completed my 30-day meditation streak! Feeling more centered and focused than ever.', likes: 124, comments: 18, liked: false, imageUrl: sampleImages.meditation },
+  { id: 2, userName: 'Mike Chen', content: 'New personal best! Ran 10km this morning and hit 15,000 steps before noon. The energy is unreal! 🏃‍♂️', likes: 89, comments: 12, liked: true, imageUrl: sampleImages.running },
+  { id: 3, userName: 'Emma Williams', content: 'Sunday meal prep done! 5 days of healthy lunches ready to go.', likes: 267, comments: 34, liked: false, imageUrl: sampleImages.meal },
+  { id: 4, userName: 'Alex Rivera', content: 'Level 5 achieved! So excited about my progress. Keep going everyone! 💪', likes: 45, comments: 7, liked: false, imageUrl: sampleImages.workout },
+  { id: 5, userName: 'Sarah Johnson', content: 'Yoga session this morning was amazing. My flexibility is improving every day!', likes: 98, comments: 15, liked: false, imageUrl: sampleImages.meditation },
+  { id: 6, userName: 'Mike Chen', content: 'Evening run to clear my mind. There is nothing better than a good workout after a long day.', likes: 67, comments: 9, liked: true, imageUrl: sampleImages.running },
+  { id: 7, userName: 'David Kim', content: 'Hit a new PR on deadlifts today! Hard work is paying off.', likes: 156, comments: 22, liked: false, imageUrl: sampleImages.workout },
+  { id: 8, userName: 'Lisa Brown', content: 'Morning smoothie: spinach, banana, almond milk, and protein powder. Perfect start!', likes: 89, comments: 14, liked: false, imageUrl: sampleImages.meal }
+];
+
+const allBlogs = [
+  { id: 301, userName: 'Sarah Johnson', time: '2 hours ago', title: 'The Benefits of Daily Meditation', excerpt: 'Discover how just 10 minutes of meditation each day can transform your mental health and reduce stress levels.', likes: 234, comments: 45, liked: false },
+  { id: 302, userName: 'Mike Chen', time: '1 day ago', title: 'My Journey to Running 10km', excerpt: 'From couch to 10km - here is my complete training plan and the lessons I learned along the way.', likes: 567, comments: 89, liked: false },
+  { id: 303, userName: 'Emma Williams', time: '3 days ago', title: '5 Healthy Meal Prep Ideas for Busy Weeks', excerpt: 'Save time and eat well with these simple meal prep recipes that will keep you energized all week long.', likes: 789, comments: 123, liked: false },
+  { id: 304, userName: 'Alex Rivera', time: '5 days ago', title: 'My Fitness Journey: From Beginner to Gold III', excerpt: 'A year ago I could barely run a mile. Here is how I transformed my health and achieved my fitness goals.', likes: 156, comments: 34, liked: false },
+  { id: 305, userName: 'David Kim', time: '1 week ago', title: 'Strength Training Fundamentals', excerpt: 'Master the basic compound movements to build a solid foundation for muscle growth and strength gains.', likes: 234, comments: 28, liked: false },
+  { id: 306, userName: 'Lisa Brown', time: '4 days ago', title: 'Nutrition Tips for Muscle Growth', excerpt: 'What to eat before and after workouts to maximize your results and recovery.', likes: 189, comments: 32, liked: false }
+];
+
+const allReels = [
+  { id: 201, userName: 'Sarah Johnson', caption: 'Morning meditation session to start the day with positive energy and clear mind.', likes: 342, comments: 24, liked: false, videoUrl: sampleVideos.meditation },
+  { id: 202, userName: 'Mike Chen', caption: 'Quick HIIT workout! 15 minutes of high intensity training to boost your metabolism.', likes: 156, comments: 18, liked: true, videoUrl: sampleVideos.workout },
+  { id: 203, userName: 'Emma Williams', caption: 'Smoothie bowl recipe that is perfect for breakfast or post-workout recovery.', likes: 489, comments: 42, liked: false, videoUrl: sampleVideos.recipe },
+  { id: 204, userName: 'Alex Rivera', caption: 'Morning stretch routine to improve flexibility and prevent injuries during workouts.', likes: 234, comments: 15, liked: true, videoUrl: sampleVideos.workout },
+  { id: 205, userName: 'David Kim', caption: 'Deadlift form check - focusing on proper technique to build strength safely.', likes: 278, comments: 31, liked: false, videoUrl: sampleVideos.workout },
+  { id: 206, userName: 'Lisa Brown', caption: 'Post-workout meal prep ideas that are quick, easy, and packed with protein.', likes: 198, comments: 26, liked: false, videoUrl: sampleVideos.recipe }
+]; 
+
+    let posts = [...allPosts];
+    let blogs = [...allBlogs];
+    let reels = [...allReels];
+    
+    // Modal elements
+    const fullscreenModal = document.getElementById('fullscreenModal');
+    const modalBackBtn = document.getElementById('modalBackBtn');
+    const modalScrollContainer = document.getElementById('modalScrollContainer');
+    
+    let currentModalItems = [];
+    let currentModalType = null;
+    
+    const pages = {
+      home: document.getElementById('homePage'),
+      social: document.getElementById('socialPage'),
+      profile: document.getElementById('profilePage'),
+      notifications: document.getElementById('notificationsPage')
+    };
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    function reanimatePage(pageEl) {
+      pageEl.style.display = 'none';
+      void pageEl.offsetHeight;
+      pageEl.style.display = '';
+    }
+
+    function switchPage(pageId) {
+      // Ensure bottom nav and floating icon are visible
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+
+      // Hide notification page if it was shown
+      const notifPage = document.getElementById('notificationsPage');
+      if (notifPage && (notifPage.style.display === 'block' || notifPage.style.display === '')) {
+        notifPage.style.display = 'none';
+        document.getElementById('homePage').style.display = 'block';
+      }
+
+      // Also hide account page if it was shown
+      const accountPage = document.getElementById('accountsPage');
+      if (accountPage && accountPage.style.display === 'block') {
+        accountPage.style.display = 'none';
+        document.getElementById('homePage').style.display = 'block';
+      }
+
+      // Also hide privacy page if it was shown
+      const privacyPage = document.getElementById('privacyPage');
+      if (privacyPage && privacyPage.style.display === 'block') {
+        privacyPage.style.display = 'none';
+      }
+
+      // Also hide about page if it was shown
+      const aboutPage = document.getElementById('aboutPage');
+      if (aboutPage && aboutPage.style.display === 'block') {
+        aboutPage.style.display = 'none';
+      }
+
+      // Also hide privacy policy page if it was shown
+      const privacyPolicyPage = document.getElementById('privacyPolicyPage');
+      if (privacyPolicyPage && privacyPolicyPage.style.display === 'block') {
+        privacyPolicyPage.style.display = 'none';
+      }
+
+      // Also hide about account page if it was shown
+      const aboutAccountPage = document.getElementById('aboutAccountPage');
+      if (aboutAccountPage && aboutAccountPage.style.display === 'block') {
+        aboutAccountPage.style.display = 'none';
+      }
+
+      // Also hide customize page if it was shown
+      const customizePage = document.getElementById('customizePage');
+      if (customizePage && customizePage.style.display === 'block') {
+        customizePage.style.display = 'none';
+      }
+
+      // Also hide update page if it was shown
+      const updatePage = document.getElementById('updatePage');
+      if (updatePage && updatePage.style.display === 'block') {
+        updatePage.style.display = 'none';
+      }
+
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      const target = pages[pageId];
+      if (target) target.classList.add('active');
+
+      // Update nav items
+      navItems.forEach((item) => {
+        item.classList.remove('active');
+        if (item.dataset.page === pageId) {
+          item.classList.add('active');
+        }
+      });
+
+      // Reset scroll animations for social/profile pages so items re-animate
+      if (target && (pageId === 'social' || pageId === 'profile')) {
+        target.querySelectorAll('.scroll-animate.visible').forEach(el => el.classList.remove('visible'));
+      }
+
+      // Re‑animate the newly shown page
+      if (target) reanimatePage(target);
+
+      // Also re‑trigger scroll animations if needed
+      if (pageId === 'social' || pageId === 'profile') {
+        setTimeout(() => initScrollAnimations(), 100);
+      }
+    }
+
+    // Helper function to reanimate the currently active page
+    function reanimateCurrentPage() {
+      const pagesList = [
+        document.getElementById('homePage'),
+        document.getElementById('socialPage'),
+        document.getElementById('profilePage')
+      ];
+      const activePage = pagesList.find(p =>
+        p.classList.contains('active') &&
+        (p.style.display === '' || p.style.display === 'block')
+      );
+      if (activePage) {
+        // Remove 'visible' class from all scroll-animate elements inside the active page
+        activePage.querySelectorAll('.scroll-animate.visible').forEach(el => {
+          el.classList.remove('visible');
+        });
+        // Reanimate the page container (hides/shows it)
+        reanimatePage(activePage);
+        // Re-initialize scroll animations so the items animate again
+        setTimeout(() => initScrollAnimations(), 100);
+        // For the home page, also re-trigger the day activity animations
+        if (activePage.id === 'homePage') {
+          setTimeout(() => animateDayElements(currentDay), 150);
+        }
+      }
+    }
+    
+    function switchFeed(type) {
+      let activeIndex = 0;
+      
+      // Update button active states
+      postsToggleBtn.classList.remove('active');
+      blogsToggleBtn.classList.remove('active');
+      reelsToggleBtn.classList.remove('active');
+      
+      if (type === 'posts') {
+        postsToggleBtn.classList.add('active');
+        activeIndex = 1;
+        renderPostsGrid();
+      } else if (type === 'blogs') {
+        blogsToggleBtn.classList.add('active');
+        activeIndex = 0;
+        renderBlogsList(blogsList, blogs);
+      } else {
+        reelsToggleBtn.classList.add('active');
+        activeIndex = 2;
+        renderReelsGrid();
+      }
+      
+      // Slide the feed slider
+      if (feedSliderTrack) {
+        feedSliderTrack.style.transform = `translateX(-${activeIndex * 33.333}%)`;
+      }
+      
+      // Update sliding border
+      setTimeout(() => {
+        updateSlidingBorder(feedSlidingBorder, activeIndex, 3);
+      }, 10);
+      
+      // Trigger animation after 200ms (faster)
+      setTimeout(() => initScrollAnimations(), 200);
+    }
+    
+    function switchProfileFeed(type) {
+      let activeIndex = 0;
+      
+      // Update button active states
+      profilePostsToggleBtn.classList.remove('active');
+      profileBlogsToggleBtn.classList.remove('active');
+      profileReelsToggleBtn.classList.remove('active');
+      
+      if (type === 'posts') {
+        profilePostsToggleBtn.classList.add('active');
+        activeIndex = 1;
+        renderMyPostsGrid();
+      } else if (type === 'blogs') {
+        profileBlogsToggleBtn.classList.add('active');
+        activeIndex = 0;
+        renderMyBlogsList();
+      } else {
+        profileReelsToggleBtn.classList.add('active');
+        activeIndex = 2;
+        renderMyReelsGrid();
+      }
+      
+      // Slide the profile slider
+      if (profileSliderTrack) {
+        profileSliderTrack.style.transform = `translateX(-${activeIndex * 33.333}%)`;
+      }
+      
+      // Update sliding border
+      setTimeout(() => {
+        updateSlidingBorder(profileSlidingBorder, activeIndex, 3);
+      }, 10);
+      
+      // Trigger animation after 200ms (faster)
+      setTimeout(() => initScrollAnimations(), 200);
+    }
+    
+    // Initialize feed and profile sliding borders
+    setTimeout(() => {
+      updateSlidingBorder(feedSlidingBorder, 0, 3);
+      updateSlidingBorder(profileSlidingBorder, 0, 3);
+    }, 10);
+    
+    function renderPostsGrid() {
+      if (!postsGrid) return;
+      let html = '';
+      posts.forEach((post) => {
+        html += `
+          <div class="grid-item scroll-animate" data-post-id="${post.id}">
+            <img src="${post.imageUrl}" alt="${post.content}">
+            <div class="post-stats-overlay">
+              <span><i class="fas fa-heart"></i> ${post.likes}</span>
+              <span><i class="fas fa-comment"></i> ${post.comments}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      if (posts.length === 0) {
+        html = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #EF5350;">No posts found</div>`;
+      }
+      
+      postsGrid.innerHTML = html;
+      
+      postsGrid.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const postId = parseInt(item.dataset.postId);
+          const post = allPosts.find(p => p.id === postId);
+          if (post) openFullscreenPost(post);
+        });
+      });
+    }
+    
+    function renderBlogsList(container, data) {
+      if (!container) return;
+      const blogsData = data || blogs;
+      let html = '';
+      blogsData.forEach((blog) => {
+        const likedClass = blog.liked ? 'liked' : '';
+        html += `
+          <div class="blog-card scroll-animate" data-blog-id="${blog.id}">
+            <div class="blog-header">
+              <div class="blog-avatar" data-username="${blog.userName}">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div class="blog-user-info" data-username="${blog.userName}">
+                <div class="blog-user-name">${blog.userName}</div>
+                <div class="blog-time">${blog.time}</div>
+              </div>
+              <button class="blog-menu-btn" style="margin-left: auto; background: none; border: none; color: #8E8E8E; font-size: 1.2rem; cursor: pointer; padding: 4px;">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+            </div>
+            <div class="blog-title">${blog.title}</div>
+            <div class="blog-excerpt">${blog.excerpt}</div>
+            <div class="blog-stats">
+              <div class="blog-stat like-btn ${likedClass}" data-id="${blog.id}">
+                <i class="far fa-heart"></i> ${blog.likes}
+              </div>
+              <div class="blog-stat comment-btn" data-id="${blog.id}">
+                <i class="far fa-comment"></i> ${blog.comments}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      if (blogsData.length === 0) {
+        html = `<div style="text-align: center; padding: 40px; color: #EF5350;">No blogs found</div>`;
+      }
+      
+      container.innerHTML = html;
+      
+      container.querySelectorAll('.blog-avatar, .blog-user-info').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const userName = el.dataset.username;
+          if (userName && userProfiles[userName]) {
+            showProfileInSocial(userName);
+          }
+        });
+      });
+      
+      container.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const blogId = parseInt(btn.dataset.id);
+          const blog = allBlogs.find(b => b.id === blogId);
+          if (blog) {
+            blog.liked = !blog.liked;
+            blog.likes += blog.liked ? 1 : -1;
+            
+            const heartIcon = blog.liked ? 'fas fa-heart' : 'far fa-heart';
+            btn.innerHTML = `<i class="${heartIcon}"></i> ${blog.likes}`;
+            btn.classList.toggle('liked', blog.liked);
+          }
+        });
+      });
+      
+      container.querySelectorAll('.comment-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          alert('✨ Comments feature coming soon!');
+        });
+      });
+
+      container.querySelectorAll('.blog-menu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const blogId = parseInt(btn.closest('.blog-card').dataset.blogId);
+          showOptionsPopup(e, blogId, 'blog', btn);
+        });
+      });
+    }
+    
+    function renderReelsGrid() {
+      if (!reelsGrid) return;
+      let html = '';
+      reels.forEach((reel) => {
+        html += `
+          <div class="grid-item reel-item scroll-animate" data-reel-id="${reel.id}">
+            <video src="${reel.videoUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>
+            <div class="post-stats-overlay">
+              <span><i class="fas fa-heart"></i> ${reel.likes}</span>
+              <span><i class="fas fa-comment"></i> ${reel.comments}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      if (reels.length === 0) {
+        html = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #EF5350;">No reels found</div>`;
+      }
+      
+      reelsGrid.innerHTML = html;
+      
+      reelsGrid.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const reelId = parseInt(item.dataset.reelId);
+          const reel = allReels.find(r => r.id === reelId);
+          if (reel) openFullscreenReel(reel);
+        });
+      });
+    }
+    
+    function renderMyPostsGrid() {
+      if (!myPostsGrid) return;
+      const myPosts = allPosts.filter(post => post.userName === 'Alex Rivera');
+      let html = '';
+      myPosts.forEach((post) => {
+        html += `
+          <div class="grid-item scroll-animate" data-post-id="${post.id}">
+            <img src="${post.imageUrl}" alt="${post.content}">
+            <div class="post-stats-overlay">
+              <span><i class="fas fa-heart"></i> ${post.likes}</span>
+              <span><i class="fas fa-comment"></i> ${post.comments}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      if (myPosts.length === 0) {
+        html = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #EF5350;">No posts yet</div>`;
+      }
+      
+      myPostsGrid.innerHTML = html;
+      
+      myPostsGrid.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const postId = parseInt(item.dataset.postId);
+          const post = allPosts.find(p => p.id === postId);
+          if (post) openFullscreenPost(post);
+        });
+      });
+    }
+    
+    function renderMyBlogsList() {
+      if (!myBlogsList) return;
+      const myBlogs = allBlogs.filter(blog => blog.userName === 'Alex Rivera');
+      renderBlogsList(myBlogsList, myBlogs);
+    }
+    
+    function renderMyReelsGrid() {
+      if (!myReelsGrid) return;
+      const myReels = allReels.filter(reel => reel.userName === 'Alex Rivera');
+      let html = '';
+      myReels.forEach((reel) => {
+        html += `
+          <div class="grid-item reel-item scroll-animate" data-reel-id="${reel.id}">
+            <video src="${reel.videoUrl}" muted playsinline style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>
+            <div class="post-stats-overlay">
+              <span><i class="fas fa-heart"></i> ${reel.likes}</span>
+              <span><i class="fas fa-comment"></i> ${reel.comments}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      if (myReels.length === 0) {
+        html = `<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #EF5350;">No reels yet</div>`;
+      }
+      
+      myReelsGrid.innerHTML = html;
+      
+      myReelsGrid.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const reelId = parseInt(item.dataset.reelId);
+          const reel = allReels.find(r => r.id === reelId);
+          if (reel) openFullscreenReel(reel);
+        });
+      });
+    }
+    
+    // Three-dot options popup
+    let currentPopup = null;
+    let currentPopupItemId = null;
+    let currentPopupType = null;
+
+    function showOptionsPopup(event, itemId, type, container) {
+      // If clicking the same three‑dots that already has a popup open, close it.
+      if (currentPopup && currentPopupItemId === itemId && currentPopupType === type) {
+        currentPopup.remove();
+        currentPopup = null;
+        currentPopupItemId = null;
+        currentPopupType = null;
+        return;
+      }
+
+      // Remove any existing popup (different item)
+      if (currentPopup) {
+        currentPopup.remove();
+        currentPopup = null;
+        currentPopupItemId = null;
+        currentPopupType = null;
+      }
+
+      const popup = document.createElement('div');
+      popup.style.cssText = `
+        position: fixed;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        padding: 0;
+        min-width: 120px;
+        z-index: 9999;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+      `;
+
+      // Position popup to the left of the button with a gap
+      const rect = container.getBoundingClientRect();
+      const gap = 8;
+      popup.style.right = `${window.innerWidth - rect.left + gap}px`;
+      popup.style.top = `${rect.top - 4}px`;
+
+      // Determine if the item belongs to the current user
+      let isOwnItem = false;
+      if (type === 'blog') {
+        const blog = allBlogs.find(b => b.id === itemId);
+        isOwnItem = blog && blog.userName === 'Alex Rivera';
+      } else if (type === 'post') {
+        const post = allPosts.find(p => p.id === itemId);
+        isOwnItem = post && post.userName === 'Alex Rivera';
+      } else if (type === 'reel') {
+        const reel = allReels.find(r => r.id === itemId);
+        isOwnItem = reel && reel.userName === 'Alex Rivera';
+      }
+
+      const options = isOwnItem
+        ? [{ label: 'Delete', action: 'delete' }]
+        : [{ label: 'Report', action: 'report' }];
+
+      options.forEach(opt => {
+        const optionEl = document.createElement('div');
+        optionEl.textContent = opt.label;
+        optionEl.style.cssText = `
+          padding: 10px 16px;
+          cursor: pointer;
+          color: ${opt.action === 'delete' ? '#E53935' : '#262626'};
+          font-weight: 500;
+          transition: background 0.1s;
+          border-radius: 8px;
+        `;
+        optionEl.addEventListener('mouseenter', () => optionEl.style.background = '#FFEBEE');
+        optionEl.addEventListener('mouseleave', () => optionEl.style.background = '');
+        optionEl.addEventListener('click', () => {
+          popup.remove();
+          currentPopup = null;
+          currentPopupItemId = null;
+          currentPopupType = null;
+          if (opt.action === 'delete') {
+            if (type === 'blog') {
+              const idx = allBlogs.findIndex(b => b.id === itemId);
+              if (idx > -1) {
+                allBlogs.splice(idx, 1);
+                blogs = [...allBlogs];
+                renderBlogsList(blogsList, blogs);
+                renderMyBlogsList();
+                setTimeout(() => initScrollAnimations(), 100);
+              }
+            } else if (type === 'post') {
+              const idx = allPosts.findIndex(p => p.id === itemId);
+              if (idx > -1) {
+                allPosts.splice(idx, 1);
+                posts = [...allPosts];
+                renderPostsGrid();
+                renderMyPostsGrid();
+                setTimeout(() => initScrollAnimations(), 100);
+              }
+            } else if (type === 'reel') {
+              const idx = allReels.findIndex(r => r.id === itemId);
+              if (idx > -1) {
+                allReels.splice(idx, 1);
+                reels = [...allReels];
+                renderReelsGrid();
+                renderMyReelsGrid();
+                setTimeout(() => initScrollAnimations(), 100);
+              }
+            }
+            alert('Content deleted.');
+            closeFullscreen();
+          } else if (opt.action === 'report') {
+            alert('Reported. We will review this content.');
+          }
+        });
+        popup.appendChild(optionEl);
+      });
+
+      document.body.appendChild(popup);
+      currentPopup = popup;
+      currentPopupItemId = itemId;
+      currentPopupType = type;
+
+      // Close on outside click
+      const closeHandler = (e) => {
+        if (!popup.contains(e.target)) {
+          popup.remove();
+          document.removeEventListener('click', closeHandler);
+          currentPopup = null;
+          currentPopupItemId = null;
+          currentPopupType = null;
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeHandler), 10);
+    }
+    
+    function createSlideContent(item, index, type) {
+      const slideDiv = document.createElement('div');
+      slideDiv.className = 'modal-slide';
+      slideDiv.dataset.index = index;
+      slideDiv.dataset.itemId = item.id;
+      slideDiv.dataset.type = type;
+      
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'modal-slide-content';
+      
+      const mediaDiv = document.createElement('div');
+      mediaDiv.className = `modal-media ${type}-media`;
+      
+      if (type === 'post' && item.imageUrl) {
+        mediaDiv.innerHTML = `<img src="${item.imageUrl}" alt="${item.content}" style="width:100%;height:100%;object-fit:contain;">`;
+      } else if (type === 'reel' && item.videoUrl) {
+        mediaDiv.innerHTML = `<video src="${item.videoUrl}" autoplay loop playsinline style="width:100%;height:100%;object-fit:contain;"></video>`;
+      }
+      
+      contentDiv.appendChild(mediaDiv);
+      
+      const profileSection = document.createElement('div');
+      profileSection.className = 'modal-profile-section';
+      
+      const contentText = type === 'post' ? item.content : item.caption;
+      const isLongCaption = contentText.length > 80;
+      const truncatedText = isLongCaption ? contentText.substring(0, 80) + '...' : contentText;
+      
+      profileSection.innerHTML = `
+        <div class="modal-profile-avatar" data-username="${item.userName}">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="modal-profile-info">
+          <span class="modal-profile-username" data-username="${item.userName}">${item.userName}</span>
+          <div class="modal-caption-wrapper">
+            <span class="modal-profile-caption" data-full-text="${contentText.replace(/"/g, '&quot;')}" data-original="${truncatedText}" data-truncated="${isLongCaption}">${truncatedText}</span>
+            ${isLongCaption ? '<span class="modal-caption-more">more</span>' : ''}
+          </div>
+        </div>
+      `;
+      
+      const sidebarDiv = document.createElement('div');
+      sidebarDiv.className = 'modal-actions-sidebar';
+      
+      const likedClass = item.liked ? 'liked' : '';
+      const heartIcon = item.liked ? 'fas fa-heart' : 'far fa-heart';
+      
+      sidebarDiv.innerHTML = `
+        <button class="modal-action-btn like-btn ${likedClass}" data-item-id="${item.id}" data-type="${type}">
+          <i class="${heartIcon}"></i>
+          <span>${item.likes}</span>
+        </button>
+        <button class="modal-action-btn comment-btn">
+          <i class="far fa-comment"></i>
+          <span>${item.comments}</span>
+        </button>
+        <button class="modal-action-btn">
+          <i class="fas fa-ellipsis-v"></i>
+          <span></span>
+        </button>
+      `;
+      
+      slideDiv.appendChild(contentDiv);
+      slideDiv.appendChild(profileSection);
+      slideDiv.appendChild(sidebarDiv);
+      
+      const likeBtn = sidebarDiv.querySelector('.like-btn');
+      likeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const itemId = parseInt(likeBtn.dataset.itemId);
+        const itemType = likeBtn.dataset.type;
+        const items = itemType === 'post' ? allPosts : allReels;
+        const item = items.find(i => i.id === itemId);
+        if (item) {
+          item.liked = !item.liked;
+          item.likes += item.liked ? 1 : -1;
+          
+          const newHeartIcon = item.liked ? 'fas fa-heart' : 'far fa-heart';
+          likeBtn.innerHTML = `<i class="${newHeartIcon}"></i><span>${item.likes}</span>`;
+          likeBtn.classList.toggle('liked', item.liked);
+          
+          renderPostsGrid();
+          renderReelsGrid();
+          renderMyPostsGrid();
+          renderMyReelsGrid();
+          setTimeout(() => initScrollAnimations(), 100);
+        }
+      });
+      
+      sidebarDiv.querySelector('.comment-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        alert('✨ Comments feature coming soon!');
+      });
+      
+      const menuBtn = sidebarDiv.querySelector('button:last-child');
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const itemId = item.id;
+        const itemType = type;
+        showOptionsPopup(e, itemId, itemType, menuBtn);
+      });
+      
+      const moreBtn = profileSection.querySelector('.modal-caption-more');
+      if (moreBtn) {
+        moreBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const captionSpan = profileSection.querySelector('.modal-profile-caption');
+          const fullText = captionSpan.dataset.fullText;
+          const originalText = captionSpan.dataset.original;
+          
+          if (captionSpan.dataset.truncated === 'true') {
+            captionSpan.textContent = fullText;
+            captionSpan.dataset.truncated = 'false';
+            moreBtn.textContent = 'less';
+            moreBtn.className = 'modal-caption-less';
+          } else {
+            captionSpan.textContent = originalText;
+            captionSpan.dataset.truncated = 'true';
+            moreBtn.textContent = 'more';
+            moreBtn.className = 'modal-caption-more';
+          }
+        });
+      }
+      
+      profileSection.querySelector('.modal-profile-avatar').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const userName = e.currentTarget.dataset.username;
+        closeFullscreen();
+        showProfileInSocial(userName);
+      });
+      
+      profileSection.querySelector('.modal-profile-username').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const userName = e.target.dataset.username;
+        closeFullscreen();
+        showProfileInSocial(userName);
+      });
+      
+      return slideDiv;
+    }
+    
+    function renderModalSlides(items, startIndex, type) {
+      modalScrollContainer.innerHTML = '';
+      
+      items.forEach((item, idx) => {
+        const slide = createSlideContent(item, idx, type);
+        modalScrollContainer.appendChild(slide);
+      });
+      
+      setTimeout(() => {
+        const slides = modalScrollContainer.children;
+        if (slides[startIndex]) {
+          slides[startIndex].scrollIntoView({ behavior: 'instant' });
+        }
+      }, 10);
+    }
+    
+    function openFullscreenWithItems(items, startItem, type) {
+      currentModalItems = items;
+      currentModalType = type;
+      const startIndex = items.findIndex(i => i.id === startItem.id);
+      
+      renderModalSlides(items, startIndex, type);
+      
+      fullscreenModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function openFullscreenPost(post) {
+      openFullscreenWithItems(posts, post, 'post');
+    }
+    
+    function openFullscreenReel(reel) {
+      openFullscreenWithItems(reels, reel, 'reel');
+    }
+    
+    function closeFullscreen() {
+      fullscreenModal.classList.remove('active');
+      document.body.style.overflow = '';
+      currentModalItems = [];
+      currentModalType = null;
+      modalScrollContainer.innerHTML = '';
+    }
+    
+    function showProfileInSocial(userName) {
+      const profile = userProfiles[userName];
+      if (!profile) return;
+      
+      const userPosts = allPosts.filter(post => post.userName === profile.name);
+      const userBlogs = allBlogs.filter(blog => blog.userName === profile.name);
+      const userReels = allReels.filter(reel => reel.userName === profile.name);
+      
+      const isOwnProfile = profile.isCurrentUser;
+      const isFollowing = profile.isFollowing || false;
+      
+      let actionButtonsHtml = '';
+      if (isOwnProfile) {
+        actionButtonsHtml = `
+          <div class="profile-actions-container">
+            <button class="profile-action-btn" id="editProfileBtnView"><i class="fas fa-pen"></i> Edit Profile</button>
+            <button class="profile-action-btn" id="shareProfileBtnView"><i class="fas fa-share-alt"></i> Share Profile</button>
+          </div>
+        `;
+      } else {
+        const followBtnText = isFollowing ? 'Following' : 'Follow';
+        const followBtnIcon = isFollowing ? 'fa-user-check' : 'fa-user-plus';
+        const followBtnClass = isFollowing ? 'following' : '';
+        
+        actionButtonsHtml = `
+          <div class="follow-chat-row">
+            <button class="follow-btn ${followBtnClass}" id="profileFollowBtn" data-username="${profile.name}">
+              <i class="fas ${followBtnIcon}"></i> ${followBtnText}
+            </button>
+            <button class="chat-btn-profile" id="profileChatBtn" data-username="${profile.name}">
+              <i class="fas fa-comment-dots"></i> Chat
+            </button>
+          </div>
+        `;
+      }
+      
+      const toggleHtml = `
+        <div class="profile-toggle" id="viewProfileToggle">
+          <button class="toggle-btn active" id="viewProfileBlogsBtn">
+            <span class="material-symbols-outlined">article</span>
+          </button>
+          <button class="toggle-btn" id="viewProfilePostsBtn">
+            <span class="material-symbols-outlined">post</span>
+          </button>
+          <button class="toggle-btn" id="viewProfileReelsBtn">
+            <span class="material-symbols-outlined">video_library</span>
+          </button>
+          <div class="sliding-border" id="viewProfileSlidingBorder"></div>
+        </div>
+        <div class="profile-slider-container">
+          <div class="profile-slider-track" id="viewProfileSliderTrack">
+            <div class="profile-slide">
+              <div id="viewProfileBlogsContainer" class="blogs-container scroll-animate"></div>
+            </div>
+            <div class="profile-slide">
+              <div id="viewProfilePostsContainer" class="posts-grid-container scroll-animate"></div>
+            </div>
+            <div class="profile-slide">
+              <div id="viewProfileReelsContainer" class="reels-grid-container scroll-animate"></div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      profileViewInSocial.innerHTML = `
+        <div class="profile-modal">
+          <div class="profile-modal-header">
+            <div class="back-button" id="backToFeedBtn"><i class="fas fa-arrow-left"></i></div>
+            <div class="profile-view-avatar"><i class="fas fa-user"></i></div>
+            <div class="profile-view-info">
+              <div class="profile-view-name-row">
+                <h3>${profile.name}</h3>
+                ${!isOwnProfile ? '<span class="gold-badge">gold III</span>' : ''}
+              </div>
+              <p>${profile.email}</p>
+              <p>${profile.age} · ${profile.height} · ${profile.weight}</p>
+            </div>
+          </div>
+          ${actionButtonsHtml}
+          ${toggleHtml}
+        </div>
+      `;
+      
+      socialFeedView.style.display = 'none';
+      profileViewInSocial.style.display = 'block';
+      
+      // Fill containers
+      const blogsContainerView = document.getElementById('viewProfileBlogsContainer');
+      const postsContainerView = document.getElementById('viewProfilePostsContainer');
+      const reelsContainerView = document.getElementById('viewProfileReelsContainer');
+      
+      // Fill blogs
+      let blogsHtml = '';
+      userBlogs.forEach((blog) => {
+        const likedClass = blog.liked ? 'liked' : '';
+        blogsHtml += `
+          <div class="blog-card scroll-animate" data-blog-id="${blog.id}">
+            <div class="blog-header">
+              <div class="blog-avatar" data-username="${blog.userName}"><i class="fas fa-user-circle"></i></div>
+              <div class="blog-user-info" data-username="${blog.userName}">
+                <div class="blog-user-name">${blog.userName}</div>
+                <div class="blog-time">${blog.time}</div>
+              </div>
+              <button class="blog-menu-btn" style="margin-left: auto; background: none; border: none; color: #8E8E8E; font-size: 1.2rem; cursor: pointer; padding: 4px;">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+            </div>
+            <div class="blog-title">${blog.title}</div>
+            <div class="blog-excerpt">${blog.excerpt}</div>
+            <div class="blog-stats">
+              <div class="blog-stat like-btn ${likedClass}" data-id="${blog.id}"><i class="far fa-heart"></i> ${blog.likes}</div>
+              <div class="blog-stat comment-btn" data-id="${blog.id}"><i class="far fa-comment"></i> ${blog.comments}</div>
+            </div>
+          </div>
+        `;
+      });
+      blogsContainerView.innerHTML = blogsHtml || '<div style="text-align:center;padding:40px;color:#EF5350;">No blogs yet.</div>';
+      
+      // Fill posts
+      let postsHtml = '<div class="grid-3-col" style="gap: 2px;">';
+      userPosts.forEach((post) => {
+        postsHtml += `<div class="grid-item scroll-animate" data-post-id="${post.id}"><img src="${post.imageUrl}"><div class="post-stats-overlay"><span><i class="fas fa-heart"></i> ${post.likes}</span><span><i class="fas fa-comment"></i> ${post.comments}</span></div></div>`;
+      });
+      postsHtml += '</div>';
+      postsContainerView.innerHTML = userPosts.length ? postsHtml : '<div style="text-align:center;padding:40px;color:#EF5350;">No posts yet.</div>';
+      
+      // Fill reels
+      let reelsHtml = '<div class="grid-3-col" style="gap: 2px;">';
+      userReels.forEach((reel) => {
+        reelsHtml += `<div class="grid-item reel-item scroll-animate" data-reel-id="${reel.id}"><video src="${reel.videoUrl}" muted playsinline></video><div class="post-stats-overlay"><span><i class="fas fa-heart"></i> ${reel.likes}</span><span><i class="fas fa-comment"></i> ${reel.comments}</span></div></div>`;
+      });
+      reelsHtml += '</div>';
+      reelsContainerView.innerHTML = userReels.length ? reelsHtml : '<div style="text-align:center;padding:40px;color:#EF5350;">No reels yet.</div>';
+      
+      document.getElementById('backToFeedBtn').addEventListener('click', () => {
+        socialFeedView.style.display = 'block';
+        profileViewInSocial.style.display = 'none';
+        renderPostsGrid(); renderReelsGrid(); renderBlogsList(blogsList, blogs);
+        setTimeout(() => initScrollAnimations(), 100);
+      });
+      
+      const viewBlogsBtn = document.getElementById('viewProfileBlogsBtn');
+      const viewPostsBtn = document.getElementById('viewProfilePostsBtn');
+      const viewReelsBtn = document.getElementById('viewProfileReelsBtn');
+      const viewProfileSliderTrack = document.getElementById('viewProfileSliderTrack');
+      const viewProfileSlidingBorder = document.getElementById('viewProfileSlidingBorder');
+      
+      setTimeout(() => {
+        updateSlidingBorder(viewProfileSlidingBorder, 0, 3);
+        initScrollAnimations();
+        // Clear the animation on the newly created border
+        if (viewProfileSlidingBorder) {
+          viewProfileSlidingBorder.style.animation = 'none';
+        }
+      }, 100);
+      
+      if (viewBlogsBtn && viewPostsBtn && viewReelsBtn) {
+        viewBlogsBtn.addEventListener('click', () => {
+          viewBlogsBtn.classList.add('active');
+          viewPostsBtn.classList.remove('active');
+          viewReelsBtn.classList.remove('active');
+          viewProfileSliderTrack.style.transform = 'translateX(0)';
+          setTimeout(() => updateSlidingBorder(viewProfileSlidingBorder, 0, 3), 10);
+          viewProfileSliderTrack.addEventListener('transitionend', function handler() {
+            viewProfileSliderTrack.removeEventListener('transitionend', handler);
+            initScrollAnimations();
+          }, { once: true });
+        });
+        viewPostsBtn.addEventListener('click', () => {
+          viewBlogsBtn.classList.remove('active');
+          viewPostsBtn.classList.add('active');
+          viewReelsBtn.classList.remove('active');
+          viewProfileSliderTrack.style.transform = 'translateX(-33.333%)';
+          setTimeout(() => updateSlidingBorder(viewProfileSlidingBorder, 1, 3), 10);
+          viewProfileSliderTrack.addEventListener('transitionend', function handler() {
+            viewProfileSliderTrack.removeEventListener('transitionend', handler);
+            initScrollAnimations();
+          }, { once: true });
+        });
+        viewReelsBtn.addEventListener('click', () => {
+          viewBlogsBtn.classList.remove('active');
+          viewPostsBtn.classList.remove('active');
+          viewReelsBtn.classList.add('active');
+          viewProfileSliderTrack.style.transform = 'translateX(-66.666%)';
+          setTimeout(() => updateSlidingBorder(viewProfileSlidingBorder, 2, 3), 10);
+          viewProfileSliderTrack.addEventListener('transitionend', function handler() {
+            viewProfileSliderTrack.removeEventListener('transitionend', handler);
+            initScrollAnimations();
+          }, { once: true });
+        });
+      }
+      
+      // Attach event listeners for the view profile items
+      blogsContainerView.querySelectorAll('.blog-avatar, .blog-user-info').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const userName = el.dataset.username;
+          if (userName && userProfiles[userName]) showProfileInSocial(userName);
+        });
+      });
+      
+      blogsContainerView.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const blogId = parseInt(btn.dataset.id);
+          const blog = allBlogs.find(b => b.id === blogId);
+          if (blog) {
+            blog.liked = !blog.liked;
+            blog.likes += blog.liked ? 1 : -1;
+            btn.innerHTML = `<i class="${blog.liked ? 'fas' : 'far'} fa-heart"></i> ${blog.likes}`;
+            btn.classList.toggle('liked', blog.liked);
+          }
+        });
+      });
+
+      blogsContainerView.querySelectorAll('.blog-menu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const blogId = parseInt(btn.closest('.blog-card').dataset.blogId);
+          showOptionsPopup(e, blogId, 'blog', btn);
+        });
+      });
+      
+      postsContainerView.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const postId = parseInt(item.dataset.postId);
+          const post = allPosts.find(p => p.id === postId);
+          if (post) openFullscreenPost(post);
+        });
+      });
+      
+      reelsContainerView.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const reelId = parseInt(item.dataset.reelId);
+          const reel = allReels.find(r => r.id === reelId);
+          if (reel) openFullscreenReel(reel);
+        });
+      });
+      
+      const followBtn = document.getElementById('profileFollowBtn');
+      if (followBtn) {
+        followBtn.addEventListener('click', () => {
+          const profile = userProfiles[followBtn.dataset.username];
+          if (profile) {
+            profile.isFollowing = !profile.isFollowing;
+            const isFollowing = profile.isFollowing;
+            followBtn.innerHTML = isFollowing ? '<i class="fas fa-user-check"></i> Following' : '<i class="fas fa-user-plus"></i> Follow';
+            followBtn.classList.toggle('following', isFollowing);
+          }
+        });
+      }
+      
+      const chatBtn = document.getElementById('profileChatBtn');
+      if (chatBtn) {
+        chatBtn.addEventListener('click', () => alert(`💬 Opening chat with ${chatBtn.dataset.username}...`));
+      }
+      
+      const editBtn = document.getElementById('editProfileBtnView');
+      if (editBtn) editBtn.addEventListener('click', () => alert('✏️ Edit Profile\n\nUpdate your personal information, profile picture, and settings.'));
+      
+      const shareBtn = document.getElementById('shareProfileBtnView');
+      if (shareBtn) shareBtn.addEventListener('click', () => alert('🔗 Share Profile\n\nCopy your profile link or share via social media.'));
+    }
+    
+    function updateActivityUI() {
+      // Render all days
+      Object.keys(activityLists).forEach(day => {
+        const container = activityLists[day];
+        if (!container) return;
+        
+        const activities = dayActivities[day];
+        let html = '';
+        activities.forEach((act, index) => {
+          const completedClass = act.completed ? 'completed' : '';
+          html += `<div class="activity-item" data-day="${day}" data-id="${act.id}">
+            <div class="activity-left">
+              <div class="activity-info">
+                <h4>${act.name}</h4>
+                <p>${act.desc}</p>
+              </div>
+            </div>
+            <div class="activity-check ${completedClass}" data-day="${day}" data-id="${act.id}">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>`;
+        });
+        
+        container.innerHTML = html;
+        
+        // Checkbox click: toggle class directly (NO re-render, NO animation)
+        container.querySelectorAll('.activity-check').forEach(el => {
+          el.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const day = this.dataset.day;
+            const id = this.dataset.id;
+            const activity = dayActivities[day].find(a => a.id === id);
+            if (activity) {
+              activity.completed = !activity.completed;
+              if (activity.completed) {
+                this.classList.add('completed');
+              } else {
+                this.classList.remove('completed');
+              }
+            }
+          });
+        });
+      });
+    }
+    
+    // Notification rendering with staggered slide-from-left animation
+    function renderNotifications() {
+      const container = document.getElementById('notificationsList');
+      const notifs = [
+        { user: 'Sarah Johnson', action: 'started following you.', time: '2h', goTo: 'profile' },
+        { user: 'Mike Chen', action: 'liked your post.', time: '5h', goTo: 'social' },
+        { user: 'Emma Williams', action: 'commented: "Great progress!"', time: '1d', goTo: 'profile' }
+      ];
+      container.innerHTML = notifs.map((n, index) => {
+        const delay = `${0.1 + index * 0.1}s`;
+        return `
+          <div class="notif-item anim-slide-from-left" style="animation-delay: ${delay};" data-goto="${n.goTo}">
+            <div class="notif-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="notif-text">
+              <span class="notif-username">${n.user}</span> ${n.action}
+              <div class="notif-time">${n.time}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Make each notification item clickable → navigate to the target page
+      container.querySelectorAll('.notif-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const goto = item.dataset.goto;
+          document.getElementById('notificationsPage').style.display = 'none';
+          document.getElementById('bottomNav').style.display = 'flex';
+          document.getElementById('floatingPersonIcon').style.display = 'flex';
+          if (goto === 'profile') {
+            switchPage('profile');
+          } else if (goto === 'social') {
+            switchPage('social');
+          } else {
+            document.getElementById('homePage').style.display = 'block';
+          }
+        });
+      });
+    }
+
+    // Account page helper
+    function showAccountPage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show account page
+      document.getElementById('accountsPage').style.display = 'block';
+    }
+
+    // Privacy page helper
+    function showPrivacyPage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('accountsPage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show privacy page
+      document.getElementById('privacyPage').style.display = 'block';
+    }
+
+    // About page helper
+    function showAboutPage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('privacyPage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show about page
+      document.getElementById('aboutPage').style.display = 'block';
+    }
+
+    // Privacy Policy page helper
+    function showPrivacyPolicyPage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('privacyPage').style.display = 'none';
+      document.getElementById('aboutPage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show privacy policy page
+      document.getElementById('privacyPolicyPage').style.display = 'block';
+    }
+
+    // About account page helper
+    function showAboutAccountPage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('privacyPage').style.display = 'none';
+      document.getElementById('aboutPage').style.display = 'none';
+      document.getElementById('privacyPolicyPage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show about account page
+      document.getElementById('aboutAccountPage').style.display = 'block';
+    }
+
+    // Customize page helper
+    function showCustomizePage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('privacyPage').style.display = 'none';
+      document.getElementById('aboutPage').style.display = 'none';
+      document.getElementById('privacyPolicyPage').style.display = 'none';
+      document.getElementById('aboutAccountPage').style.display = 'none';
+      document.getElementById('updatePage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show customize page
+      document.getElementById('customizePage').style.display = 'block';
+      // Clear the initial animation on the customize border so the sliding border can move freely
+      const border = document.getElementById('customizeSlidingBorder');
+      if (border) border.style.animation = 'none';
+      renderCustomizeExercises();
+    }
+
+    // Update page helper
+    function showUpdatePage() {
+      // Hide all main pages
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('socialPage').classList.remove('active');
+      document.getElementById('profilePage').classList.remove('active');
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('privacyPage').style.display = 'none';
+      document.getElementById('aboutPage').style.display = 'none';
+      document.getElementById('privacyPolicyPage').style.display = 'none';
+      document.getElementById('aboutAccountPage').style.display = 'none';
+      document.getElementById('customizePage').style.display = 'none';
+      // Hide bottom nav and floating icon
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      // Show update page
+      document.getElementById('updatePage').style.display = 'block';
+    }
+
+    // --- CUSTOMIZE PAGE LOGIC ---
+    let currentCustomizeDay = 'mon';
+    const customizeDayBtns = document.querySelectorAll('#customizeDayToggle .day-btn');
+    const customizeExerciseList = document.getElementById('customizeExerciseList');
+    const customizeSlidingBorder = document.getElementById('customizeSlidingBorder');
+
+    function renderCustomizeExercises() {
+      const activities = dayActivities[currentCustomizeDay];
+      let html = '';
+      activities.forEach((act, idx) => {
+        html += `
+          <div class="activity-item" data-id="${act.id}">
+            <div class="activity-left">
+              <div class="activity-info">
+                <input type="text" value="${act.name}" placeholder="New Exercise" style="font-weight:700; color:#585858; border:none; outline:none; background:transparent; width:100%;" data-field="name" data-id="${act.id}">
+                <input type="text" value="${act.desc}" placeholder="Tap to edit" style="color:#EF5350; border:none; outline:none; background:transparent; width:100%;" data-field="desc" data-id="${act.id}">
+              </div>
+            </div>
+            <button class="delete-exercise-btn" data-id="${act.id}" style="color:#E53935; cursor:pointer; font-size:1.2rem; background:none; border:none;">🗑</button>
+          </div>
+        `;
+      });
+      customizeExerciseList.innerHTML = html;
+
+      // Attach delete handlers
+      document.querySelectorAll('.delete-exercise-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const idx = dayActivities[currentCustomizeDay].findIndex(a => a.id === id);
+          if (idx > -1) {
+            dayActivities[currentCustomizeDay].splice(idx, 1);
+            renderCustomizeExercises();
+            updateActivityUI();
+          }
+        });
+      });
+
+      // Attach input change handlers
+      document.querySelectorAll('#customizeExerciseList input').forEach(input => {
+        input.addEventListener('input', () => {
+          const id = input.dataset.id;
+          const field = input.dataset.field;
+          const activity = dayActivities[currentCustomizeDay].find(a => a.id === id);
+          if (activity) {
+            if (field === 'name') activity.name = input.value;
+            else if (field === 'desc') activity.desc = input.value;
+            updateActivityUI();
+          }
+        });
+      });
+    }
+
+    // Day toggle for customize page
+    customizeDayBtns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        currentCustomizeDay = btn.dataset.day;
+        customizeDayBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateSlidingBorder(customizeSlidingBorder, index, 7);
+        renderCustomizeExercises();
+      });
+    });
+
+    // Initialize border
+    setTimeout(() => updateSlidingBorder(customizeSlidingBorder, 0, 7), 10);
+
+    // Add exercise button
+    document.getElementById('addExerciseBtn').addEventListener('click', () => {
+      const newId = 'custom' + Date.now();
+      dayActivities[currentCustomizeDay].push({
+        id: newId,
+        name: '',
+        desc: '',
+        completed: false
+      });
+      renderCustomizeExercises();
+      updateActivityUI();
+    });
+
+    // Click handler for any element with class "customize-link"
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.customize-link')) {
+        showCustomizePage();
+      }
+    });
+
+    // Back button from update page to home
+    document.getElementById('updateBackBtn')?.addEventListener('click', () => {
+      document.getElementById('updatePage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('home');
+    });
+
+    // Back button from customize page to home
+    document.getElementById('customizeBackBtn')?.addEventListener('click', () => {
+      document.getElementById('customizePage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('home');
+    });
+
+    // Back button from accounts to profile
+    document.getElementById('accountBackBtn')?.addEventListener('click', () => {
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('profile');
+    });
+
+    // Back button from privacy page to profile
+    document.getElementById('privacyBackBtn')?.addEventListener('click', () => {
+      document.getElementById('privacyPage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('profile');
+    });
+
+    // Back button from about page to profile
+    document.getElementById('aboutBackBtn')?.addEventListener('click', () => {
+      document.getElementById('aboutPage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('profile');
+    });
+
+    // Back button from privacy policy page to about page
+    document.getElementById('privacyPolicyBackBtn')?.addEventListener('click', () => {
+      document.getElementById('privacyPolicyPage').style.display = 'none';
+      showAboutPage();
+    });
+
+    // Back button from about account page to about page
+    document.getElementById('aboutAccountBackBtn')?.addEventListener('click', () => {
+      document.getElementById('aboutAccountPage').style.display = 'none';
+      showAboutPage();
+    });
+
+    // Click handler for "About your account" link
+    document.getElementById('aboutAccountLink')?.addEventListener('click', () => {
+      showAboutAccountPage();
+    });
+
+    // Click handler for "Privacy Policy" link
+    document.getElementById('privacyPolicyLink')?.addEventListener('click', () => {
+      showPrivacyPolicyPage();
+    });
+
+    // Logout button
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      alert('Logout clicked – implement your logout logic here.');
+      document.getElementById('accountsPage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('home');
+    });
+
+    // Notification icon click → go to notification page
+    document.getElementById('notificationIcon')?.addEventListener('click', () => {
+      document.getElementById('bottomNav').style.display = 'none';
+      document.getElementById('floatingPersonIcon').style.display = 'none';
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('notificationsPage').style.display = 'block';
+      renderNotifications();
+      const badge = document.querySelector('.notification-badge');
+      if (badge) badge.style.display = 'none';
+    });
+
+    // Back button from notifications to home
+    document.getElementById('notifBackBtn')?.addEventListener('click', () => {
+      document.getElementById('notificationsPage').style.display = 'none';
+      document.getElementById('bottomNav').style.display = 'flex';
+      document.getElementById('floatingPersonIcon').style.display = 'flex';
+      switchPage('home');
+    });
+
+    // Event Listeners
+    modalBackBtn.addEventListener('click', closeFullscreen);
+    
+    if (postsToggleBtn) postsToggleBtn.addEventListener('click', () => switchFeed('posts'));
+    if (blogsToggleBtn) blogsToggleBtn.addEventListener('click', () => switchFeed('blogs'));
+    if (reelsToggleBtn) reelsToggleBtn.addEventListener('click', () => switchFeed('reels'));
+    if (profilePostsToggleBtn) profilePostsToggleBtn.addEventListener('click', () => switchProfileFeed('posts'));
+    if (profileBlogsToggleBtn) profileBlogsToggleBtn.addEventListener('click', () => switchProfileFeed('blogs'));
+    if (profileReelsToggleBtn) profileReelsToggleBtn.addEventListener('click', () => switchProfileFeed('reels'));
+    
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    if (editProfileBtn) editProfileBtn.addEventListener('click', () => alert('✏️ Edit Profile\n\nUpdate your personal information, profile picture, and settings.'));
+    
+    const shareProfileBtn = document.getElementById('shareProfileBtn');
+    if (shareProfileBtn) shareProfileBtn.addEventListener('click', () => alert('🔗 Share Profile\n\nCopy your profile link or share via social media.'));
+
+    // Create post modal close — reanimates the underlying page
+    document.getElementById('createPostCloseBtn')?.addEventListener('click', () => {
+      document.getElementById('createPostModal').style.display = 'none';
+      reanimateCurrentPage();
+    });
+
+    // Tab switching inside create modal
+    const createTabBtns = document.querySelectorAll('#createPostModal .create-tab-btn');
+    const createTabPanels = document.querySelectorAll('#createPostModal .create-tab-panel');
+    const createModalTitle = document.getElementById('createModalTitle');
+
+    createTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        // Update buttons
+        createTabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Update panels
+        createTabPanels.forEach(p => {
+          p.style.display = p.dataset.tab === tab ? 'flex' : 'none';
+        });
+        // Update title
+        if (tab === 'blog') createModalTitle.textContent = 'New Blog';
+        else if (tab === 'post') createModalTitle.textContent = 'New Post';
+        else if (tab === 'reel') createModalTitle.textContent = 'New Reel';
+
+        // Move sliding border
+        const tabIndices = { blog: 0, post: 1, reel: 2 };
+        updateSlidingBorder(createModalSlidingBorder, tabIndices[tab], 3);
+      });
+    });
+
+    // --- INSTAGRAM STYLE MENU ---
+    const menuOptions = [
+      { icon: 'fa-user-circle', label: 'Accounts', action: 'accounts' },
+      { icon: 'fa-lock', label: 'Account privacy', action: 'privacy' },
+      { icon: 'fa-info-circle', label: 'About', action: 'about' }
+    ];
+
+    const menuModal = document.getElementById('profileMenuModal');
+    const menuSheet = document.getElementById('menuSheet');
+    const menuContainer = document.getElementById('menuItemsContainer');
+
+    // Menu drag-to-dismiss variables
+    let menuStartY = 0;
+    let isDragging = false;
+
+    function onMenuDragStart(e) {
+      menuStartY = e.touches[0].clientY;
+      isDragging = true;
+      menuSheet.style.transition = 'none';
+      menuSheet.style.overflow = 'hidden';
+
+      // Listen to moves / ends on the whole document
+      document.addEventListener('touchmove', onMenuDragMove, { passive: false });
+      document.addEventListener('touchend', onMenuDragEnd);
+    }
+
+    function onMenuDragMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const deltaY = e.touches[0].clientY - menuStartY;
+      menuSheet.style.transform = `translateY(${deltaY}px)`;
+    }
+
+    function onMenuDragEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+
+      document.removeEventListener('touchmove', onMenuDragMove);
+      document.removeEventListener('touchend', onMenuDragEnd);
+
+      const currentTranslate = menuSheet.style.transform;
+      const match = currentTranslate.match(/translateY\(([^)]+)\)/);
+      const finalY = match ? parseInt(match[1], 10) : 0;
+
+      menuSheet.style.transition = 'transform 0.3s ease-out';
+      if (finalY > 100) {
+        // Dismiss the menu
+        menuSheet.style.transform = 'translateY(100%)';
+        setTimeout(() => { menuModal.style.display = 'none'; }, 300);
+      } else {
+        // Snap back
+        menuSheet.style.transform = 'translateY(0)';
+      }
+      menuSheet.style.overflow = 'auto';
+    }
+
+    function renderMenu() {
+      let html = '';
+      menuOptions.forEach(opt => {
+        html += `
+          <div class="menu-item" data-action="${opt.action}" style="display: flex; align-items: center; padding: 14px 24px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid #F0F0F0;">
+            <div style="width: 32px; display: flex; justify-content: center; margin-right: 16px; color: #262626;">
+              <i class="fas ${opt.icon}" style="font-size: 1.4rem; color: #C62828;"></i>
+            </div>
+            <span style="font-size: 1rem; font-weight: 500; color: #262626; flex: 1;">${opt.label}</span>
+            <i class="fas fa-chevron-right" style="color: #8E8E8E; font-size: 0.8rem;"></i>
+          </div>
+        `;
+      });
+      menuContainer.innerHTML = html;
+
+      // Attach drag handlers to the handle
+      const dragHandle = document.getElementById('menuDragHandle');
+      if (dragHandle) {
+        dragHandle.addEventListener('touchstart', onMenuDragStart, { passive: false });
+      }
+
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const action = item.dataset.action;
+          const label = menuOptions.find(o => o.action === action)?.label || action;
+          
+          switch(action) {
+            case 'accounts':
+              closeMenu();
+              showAccountPage();
+              break;
+            case 'privacy':
+              closeMenu();
+              showPrivacyPage();
+              break;
+            case 'about':
+              closeMenu();
+              showAboutPage();
+              break;
+            default: alert(`✨ ${label}`);
+          }
+        });
+      });
+    }
+
+    function openMenu() {
+      renderMenu();
+      menuModal.style.display = 'flex';
+      menuSheet.offsetHeight;
+      menuSheet.style.transform = 'translateY(0)';
+      
+      menuModal.addEventListener('click', function closeOnBackdrop(e) {
+        if (e.target === menuModal) {
+          closeMenu();
+          menuModal.removeEventListener('click', closeOnBackdrop);
+        }
+      });
+    }
+
+    function closeMenu() {
+      menuSheet.style.transform = 'translateY(100%)';
+      setTimeout(() => { menuModal.style.display = 'none'; }, 200);
+    }
+
+    const profileMenuIcon = document.getElementById('profileMenuIcon');
+    if (profileMenuIcon) {
+      profileMenuIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openMenu();
+      });
+    }
+    // --- END OF MENU ADDITION ---
+
+    // Preview & Next logic
+    const postFileInput = document.getElementById('postFileInput');
+    const reelFileInput = document.getElementById('reelFileInput');
+    const blogTitleInput = document.getElementById('blogTitleInput');
+    const nextBtn = document.getElementById('createPostNextBtn');
+
+    const postPreview = document.getElementById('postPreview');
+    const postLabel = document.getElementById('postFileLabel');
+    const reelPreview = document.getElementById('reelPreview');
+    const reelLabel = document.getElementById('reelFileLabel');
+
+    let postDataUrl = null;
+    let reelVideoUrl = null;
+
+    function checkNextEnabled() {
+      const activeTab = document.querySelector('#createModalTabs .create-tab-btn.active').dataset.tab;
+      let enabled = false;
+      if (activeTab === 'post' && postFileInput && postFileInput.files.length > 0) enabled = true;
+      if (activeTab === 'reel' && reelFileInput && reelFileInput.files.length > 0) enabled = true;
+      if (activeTab === 'blog' && blogTitleInput && blogTitleInput.value.trim().length > 0) enabled = true;
+      
+      nextBtn.style.opacity = enabled ? '1' : '0.5';
+      nextBtn.style.pointerEvents = enabled ? 'auto' : 'none';
+    }
+
+    // Allow re‑selecting by tapping the preview
+    document.getElementById('postPreviewContainer')?.addEventListener('click', () => {
+      postFileInput.click();
+    });
+    document.getElementById('reelPreviewContainer')?.addEventListener('click', () => {
+      reelFileInput.click();
+    });
+
+    // Post preview
+    postFileInput?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          postDataUrl = ev.target.result;
+          postPreview.src = postDataUrl;
+          postPreview.style.display = 'block';
+          // Show preview container + caption
+          postLabel.style.display = 'none';
+          document.getElementById('postPreviewContainer').style.display = 'flex';
+          document.getElementById('postCaptionWrapper').style.display = 'block';
+          checkNextEnabled();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Reel preview
+    reelFileInput?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        reelVideoUrl = URL.createObjectURL(file);
+        reelPreview.src = reelVideoUrl;
+        reelPreview.style.display = 'block';
+        // Show preview container + caption
+        reelLabel.style.display = 'none';
+        document.getElementById('reelPreviewContainer').style.display = 'flex';
+        document.getElementById('reelCaptionWrapper').style.display = 'block';
+        checkNextEnabled();
+      }
+    });
+
+    blogTitleInput?.addEventListener('input', checkNextEnabled);
+    blogTitleInput?.addEventListener('change', checkNextEnabled);
+
+    // Next button action — closes modal and reanimates the page underneath
+    nextBtn.addEventListener('click', () => {
+      const activeTab = document.querySelector('#createModalTabs .create-tab-btn.active').dataset.tab;
+      const currentUser = 'Alex Rivera';
+
+      if (activeTab === 'post' && postFileInput.files.length > 0) {
+        const caption = document.getElementById('postCaptionInput')?.value.trim() || '';
+        const newPost = {
+          id: Date.now(),
+          userName: currentUser,
+          content: caption,
+          likes: 0,
+          comments: 0,
+          liked: false,
+          imageUrl: postDataUrl
+        };
+        allPosts.unshift(newPost);
+        posts = [...allPosts];
+        renderPostsGrid();
+        setTimeout(() => initScrollAnimations(), 100);
+      }
+      else if (activeTab === 'reel' && reelFileInput.files.length > 0) {
+        const caption = document.getElementById('reelCaptionInput')?.value.trim() || '';
+        const newReel = {
+          id: Date.now(),
+          userName: currentUser,
+          caption: caption,
+          likes: 0,
+          comments: 0,
+          liked: false,
+          videoUrl: reelVideoUrl
+        };
+        allReels.unshift(newReel);
+        reels = [...allReels];
+        renderReelsGrid();
+        setTimeout(() => initScrollAnimations(), 100);
+      }
+      else if (activeTab === 'blog' && blogTitleInput.value.trim().length > 0) {
+        const content = document.getElementById('blogContentInput').value.trim() || 'No content yet.';
+        const newBlog = {
+          id: Date.now() + 1000,
+          userName: currentUser,
+          time: 'Just now',
+          title: blogTitleInput.value.trim(),
+          excerpt: content.substring(0, 100) + (content.length > 100 ? '...' : ''),
+          likes: 0,
+          comments: 0,
+          liked: false
+        };
+        allBlogs.unshift(newBlog);
+        blogs = [...allBlogs];
+        renderBlogsList(blogsList, blogs);
+        setTimeout(() => initScrollAnimations(), 100);
+      }
+
+      // Close and reset the modal
+      document.getElementById('createPostModal').style.display = 'none';
+      reanimateCurrentPage();  // Reanimate the underlying page after publishing
+
+      // Reset inputs and previews
+      postFileInput.value = '';
+      postPreview.style.display = 'none';
+      postLabel.style.display = 'flex';
+      postDataUrl = null;
+      document.getElementById('postCaptionInput').value = '';
+      document.getElementById('postCaptionWrapper').style.display = 'none';
+      document.getElementById('postPreviewContainer').style.display = 'none';
+
+      reelFileInput.value = '';
+      reelPreview.style.display = 'none';
+      reelLabel.style.display = 'flex';
+      reelVideoUrl = null;
+      document.getElementById('reelCaptionInput').value = '';
+      document.getElementById('reelCaptionWrapper').style.display = 'none';
+      document.getElementById('reelPreviewContainer').style.display = 'none';
+
+      blogTitleInput.value = '';
+      document.getElementById('blogContentInput').value = '';
+
+      nextBtn.style.opacity = '0.5';
+      nextBtn.style.pointerEvents = 'none';
+    });
+
+    function init() {
+      updateActivityUI();
+      renderPostsGrid();
+      renderBlogsList(blogsList, blogs);
+      renderReelsGrid();
+      renderMyPostsGrid();
+      renderMyBlogsList();
+      renderMyReelsGrid();
+      
+      // Initialize scroll animations at start
+      setTimeout(() => {
+        initScrollAnimations();
+        
+        // Clear initial slide-from-center animation on sliding borders after it finishes
+        setTimeout(() => {
+          const borders = [
+            document.getElementById('daySlidingBorder'),
+            document.getElementById('feedSlidingBorder'),
+            document.getElementById('profileSlidingBorder')
+          ];
+          borders.forEach(border => {
+            if (border) border.style.animation = 'none';
+          });
+        }, 800);
+      }, 100);
+      
+      // Animate the initial day (Monday) elements
+      setTimeout(() => {
+        animateDayElements(currentDay);
+      }, 150);
+      
+      navItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const page = item.dataset.page;
+          if (page === 'social') {
+            socialFeedView.style.display = 'block';
+            profileViewInSocial.style.display = 'none';
+            renderPostsGrid(); renderBlogsList(blogsList, blogs); renderReelsGrid();
+            setTimeout(() => initScrollAnimations(), 100);
+          }
+          if (page === 'profile') {
+            // Reset visible class so content re-animates every time
+            document.querySelectorAll('#profilePage .scroll-animate').forEach(el => el.classList.remove('visible'));
+            setTimeout(() => initScrollAnimations(), 100);
+          }
+          switchPage(page);
+        });
+      });
+    }
+    init();
+  })();
+</script>
+</body>
+</html>
